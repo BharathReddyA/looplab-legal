@@ -99,9 +99,11 @@
   <div class="footer">Made with LoopLab AI · bharathreddya.github.io/looplab-legal</div>
 
   <script>
-    // Get song ID from URL path: /song/SONG_ID
+    // Get song ID from query param ?id=SONG_ID (set by 404.html redirect)
+    // or from path /song/SONG_ID directly
+    const params = new URLSearchParams(window.location.search);
     const pathParts = window.location.pathname.split('/');
-    const songId = pathParts[pathParts.length - 1];
+    const songId = params.get('id') || pathParts[pathParts.length - 1];
 
     // Try to fetch song info for display
     if (songId && songId !== 'song') {
