@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoopLab — AI Song</title>
+  <meta name="description" content="Listen to this AI-generated song on LoopLab" />
+
+  <!-- Open Graph for WhatsApp/iMessage link previews -->
+  <meta property="og:type" content="music.song" />
+  <meta property="og:site_name" content="LoopLab AI" />
+  <meta property="og:title" content="LoopLab AI Song" />
+  <meta property="og:description" content="Listen to this AI-generated song on LoopLab" />
+  <meta property="og:image" content="https://bharathreddya.github.io/looplab-legal/og-image.png" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0A0A0A; color: #fff;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%; max-width: 380px;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px; padding: 32px 24px;
+      text-align: center;
+    }
+    .logo { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
+    .album-art {
+      width: 120px; height: 120px; border-radius: 20px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; font-size: 48px;
+    }
+    .song-title { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .song-meta { font-size: 14px; color: rgba(255,255,255,0.45); margin-bottom: 32px; }
+    .btn-primary {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 16px; border-radius: 50px;
+      background: #fff; color: #000;
+      font-size: 16px; font-weight: 700; text-decoration: none;
+      margin-bottom: 12px; border: none; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-secondary {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 14px; border-radius: 50px;
+      background: transparent; color: #fff;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.05); }
+    .divider { color: rgba(255,255,255,0.2); font-size: 12px; margin: 16px 0; }
+    .store-buttons { display: flex; gap: 10px; margin-top: 12px; }
+    .store-btn {
+      flex: 1; padding: 12px 8px; border-radius: 14px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; font-size: 13px; font-weight: 600;
+      text-decoration: none; text-align: center;
+      transition: background 0.2s;
+    }
+    .store-btn:hover { background: rgba(255,255,255,0.12); }
+    .footer { margin-top: 28px; font-size: 12px; color: rgba(255,255,255,0.2); }
+    #status { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 8px; min-height: 20px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">LOOPLAB AI</div>
+    <div class="album-art">🎵</div>
+    <div class="song-title" id="songTitle">AI Song</div>
+    <div class="song-meta" id="songMeta">Loading...</div>
+
+    <button class="btn-primary" onclick="openInApp()">
+      ▶ Open in LoopLab
+    </button>
+    <div id="status"></div>
+
+    <div class="divider">— Don't have the app? —</div>
+
+    <div class="store-buttons">
+      <a class="store-btn" href="https://apps.apple.com/app/id6774776556">
+        🍎 App Store
+      </a>
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.bharathreddya.github.io/looplab-legal">
+        🤖 Play Store
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">Made with LoopLab AI · bharathreddya.github.io/looplab-legal</div>
+
+  <script>
+    // Get song ID from URL path: /song/SONG_ID
+    const pathParts = window.location.pathname.split('/');
+    const songId = pathParts[pathParts.length - 1];
+
+    // Try to fetch song info for display
+    if (songId && songId !== 'song') {
+      fetch(`https://discerning-emotion-production-43dd.up.railway.app/songs/${songId}/public`)
+        .then(r => r.json())
+        .then(data => {
+          if (data.song) {
+            document.getElementById('songTitle').textContent = data.song.title || 'AI Song';
+            const meta = [data.song.genre, data.song.mood, data.song.language]
+              .filter(Boolean).join(' · ');
+            document.getElementById('songMeta').textContent = meta || 'LoopLab AI Generated';
+            document.title = `${data.song.title} — LoopLab AI`;
+          }
+        })
+        .catch(() => {
+          document.getElementById('songMeta').textContent = 'AI Generated Song';
+        });
+    }
+
+    function openInApp() {
+      const deepLink = `looplab://song/${songId}`;
+      const status = document.getElementById('status');
+      status.textContent = 'Opening LoopLab...';
+
+      // Try to open the app
+      window.location.href = deepLink;
+
+      // If app not installed, show store buttons after 2s
+      setTimeout(() => {
+        status.textContent = "App not installed? Download below ↓";
+      }, 2000);
+    }
+
+    // Auto-attempt deep link on mobile
+    const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+    if (isMobile && songId) {
+      setTimeout(() => openInApp(), 500);
+    }
+  </script>
+</body>
+</html>
