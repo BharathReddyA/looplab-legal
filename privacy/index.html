@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoopLab — Legal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0A0A0A;
+      color: #E5E5E5;
+      line-height: 1.7;
+    }
+    nav {
+      position: sticky; top: 0;
+      background: #0A0A0A;
+      border-bottom: 1px solid #1A1A1A;
+      padding: 16px 24px;
+      display: flex; gap: 24px; align-items: center;
+      z-index: 100;
+    }
+    nav a {
+      color: #999; text-decoration: none; font-size: 14px; font-weight: 500;
+      padding: 6px 12px; border-radius: 20px; transition: all 0.2s;
+    }
+    nav a:hover, nav a.active { background: #1A1A1A; color: #fff; }
+    .logo { font-size: 18px; font-weight: 700; color: #fff; margin-right: auto; }
+    .container { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+    .page { display: none; }
+    .page.active { display: block; }
+    h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .updated { font-size: 13px; color: #666; margin-bottom: 40px; }
+    h2 { font-size: 18px; font-weight: 600; color: #fff; margin: 32px 0 12px; }
+    p { color: #999; margin-bottom: 16px; font-size: 15px; }
+    ul { color: #999; padding-left: 20px; margin-bottom: 16px; }
+    li { margin-bottom: 8px; font-size: 15px; }
+    a { color: #fff; }
+    .card {
+      background: #111; border: 1px solid #1A1A1A;
+      border-radius: 12px; padding: 20px 24px; margin-bottom: 16px;
+    }
+    .contact {
+      background: #111; border: 1px solid #1A1A1A;
+      border-radius: 12px; padding: 24px; margin-top: 40px; text-align: center;
+    }
+    .contact p { margin: 0; }
+    .contact a { font-weight: 600; }
+    hr { border: none; border-top: 1px solid #1A1A1A; margin: 32px 0; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">LoopLab</span>
+  <a href="#" class="active" onclick="show('privacy', this)">Privacy Policy</a>
+  <a href="#" onclick="show('terms', this)">Terms of Service</a>
+</nav>
+
+<!-- PRIVACY POLICY -->
+<div class="container">
+<div id="privacy" class="page active">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: May 29, 2026</p>
+
+  <p>LoopLab ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use the LoopLab mobile application.</p>
+
+  <h2>1. Information We Collect</h2>
+  <div class="card">
+    <p><strong style="color:#fff">Account Information</strong><br>
+    When you create an account, we collect your name, email address, and a hashed (encrypted) password.</p>
+  </div>
+  <div class="card">
+    <p><strong style="color:#fff">Platform Connections</strong><br>
+    If you connect Spotify or YouTube Music, we receive an access token to read and create playlists on your behalf. We do not store your Spotify or Google passwords.</p>
+  </div>
+  <div class="card">
+    <p><strong style="color:#fff">Usage Data</strong><br>
+    We collect playlists you generate, songs you create, and preferences you set within the app. This is stored securely in our database.</p>
+  </div>
+  <div class="card">
+    <p><strong style="color:#fff">Audio Content</strong><br>
+    AI-generated songs are uploaded to Cloudinary (a secure cloud storage service) and linked to your account.</p>
+  </div>
+  <div class="card">
+    <p><strong style="color:#fff">Voice Input</strong><br>
+    If you use the voice input feature, audio is temporarily processed by Google Gemini for transcription and is not stored by us.</p>
+  </div>
+
+  <h2>2. How We Use Your Information</h2>
+  <ul>
+    <li>To provide and improve the LoopLab service</li>
+    <li>To generate AI playlists and songs personalized to your preferences</li>
+    <li>To sync playlists to your connected Spotify or YouTube Music account</li>
+    <li>To display your saved songs and playlists in your profile</li>
+    <li>To enable the Discover feature where you can share playlists publicly</li>
+  </ul>
+
+  <h2>3. Third-Party Services</h2>
+  <p>LoopLab uses the following third-party services:</p>
+  <ul>
+    <li><strong style="color:#fff">Spotify API</strong> — to read and create playlists</li>
+    <li><strong style="color:#fff">YouTube Data API</strong> — to read and create playlists</li>
+    <li><strong style="color:#fff">Google Gemini AI</strong> — to generate playlist recommendations and transcribe voice input</li>
+    <li><strong style="color:#fff">ElevenLabs</strong> — to generate AI music</li>
+    <li><strong style="color:#fff">Cloudinary</strong> — to store generated audio files</li>
+    <li><strong style="color:#fff">MongoDB Atlas</strong> — to store user data securely</li>
+    <li><strong style="color:#fff">Railway</strong> — to host our backend services</li>
+  </ul>
+  <p>Each of these services has their own privacy policies. We encourage you to review them.</p>
+
+  <h2>4. Data Sharing</h2>
+  <p>We do not sell, trade, or rent your personal information to third parties. We only share data with the third-party services listed above as necessary to provide the LoopLab service.</p>
+  <p>If you make a playlist public in the Discover section, other LoopLab users will be able to see it. You can change visibility to private at any time from your Profile tab.</p>
+
+  <h2>5. Data Security</h2>
+  <p>We implement industry-standard security measures including encrypted passwords (bcrypt), JWT authentication tokens, and HTTPS for all data transmission. Access tokens for Spotify and Google are stored securely on your device using encrypted storage.</p>
+
+  <h2>6. Data Retention</h2>
+  <p>We retain your data for as long as your account is active. You may request deletion of your account and associated data by contacting us at the email below.</p>
+
+  <h2>7. Children's Privacy</h2>
+  <p>LoopLab is not intended for children under 13. We do not knowingly collect personal information from children under 13. If you believe we have collected such information, please contact us immediately.</p>
+
+  <h2>8. Your Rights</h2>
+  <ul>
+    <li>Access the personal data we hold about you</li>
+    <li>Request correction of inaccurate data</li>
+    <li>Request deletion of your data</li>
+    <li>Disconnect Spotify or YouTube Music at any time from your Profile</li>
+    <li>Make your playlists private or delete them at any time</li>
+  </ul>
+
+  <h2>9. Changes to This Policy</h2>
+  <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the "Last updated" date above. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+
+  <div class="contact">
+    <p>Questions about this Privacy Policy?<br>
+    Contact us at <a href="mailto:support@looplab.app">support@looplab.app</a></p>
+  </div>
+</div>
+
+<!-- TERMS OF SERVICE -->
+<div id="terms" class="page">
+  <h1>Terms of Service</h1>
+  <p class="updated">Last updated: May 29, 2026</p>
+
+  <p>Please read these Terms of Service carefully before using the LoopLab application. By using LoopLab, you agree to be bound by these terms.</p>
+
+  <h2>1. Acceptance of Terms</h2>
+  <p>By downloading, installing, or using LoopLab, you agree to these Terms of Service and our Privacy Policy. If you do not agree, do not use the app.</p>
+
+  <h2>2. Description of Service</h2>
+  <p>LoopLab is an AI-powered music application that allows users to:</p>
+  <ul>
+    <li>Generate AI playlists based on genre, mood, occasion, or conversation</li>
+    <li>Convert playlists between Spotify and YouTube Music</li>
+    <li>Create original AI-generated songs using ElevenLabs music generation</li>
+    <li>Save and share playlists with the LoopLab community</li>
+  </ul>
+
+  <h2>3. User Accounts</h2>
+  <p>You must create an account to use LoopLab. You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account.</p>
+  <p>You must provide accurate information when creating your account. You may not create accounts for others or use the service to impersonate others.</p>
+
+  <h2>4. AI-Generated Content</h2>
+  <p>LoopLab uses artificial intelligence to generate playlists and songs. By using these features:</p>
+  <ul>
+    <li>You acknowledge that AI-generated content may not always be accurate or appropriate</li>
+    <li>AI-generated songs are original compositions — you own the songs you create within the app subject to ElevenLabs' terms of service</li>
+    <li>You may not use AI-generated content for commercial purposes without verifying ownership rights</li>
+    <li>We are not responsible for the quality, accuracy, or fitness for purpose of AI-generated content</li>
+  </ul>
+
+  <h2>5. Third-Party Platform Integration</h2>
+  <p>LoopLab integrates with Spotify and YouTube Music. By connecting these accounts:</p>
+  <ul>
+    <li>You authorize LoopLab to access and create playlists on your behalf</li>
+    <li>You remain bound by Spotify's and Google's respective Terms of Service</li>
+    <li>We are not affiliated with or endorsed by Spotify or Google/YouTube</li>
+    <li>Third-party platform availability and API access may change without notice</li>
+  </ul>
+
+  <h2>6. Acceptable Use</h2>
+  <p>You agree not to:</p>
+  <ul>
+    <li>Use the service for any illegal purpose</li>
+    <li>Attempt to reverse engineer, hack, or compromise the service</li>
+    <li>Upload harmful, offensive, or inappropriate content</li>
+    <li>Abuse the AI generation features to create content that violates copyright</li>
+    <li>Use automated tools to access the service excessively</li>
+    <li>Share another user's private playlists without permission</li>
+  </ul>
+
+  <h2>7. Community Discover Feature</h2>
+  <p>When you make a playlist public in the Discover section:</p>
+  <ul>
+    <li>Other users can view and convert your playlist</li>
+    <li>You grant LoopLab a non-exclusive license to display your playlist title and song list</li>
+    <li>You can make your playlist private or delete it at any time</li>
+    <li>You are responsible for ensuring playlists you share do not violate any third-party rights</li>
+  </ul>
+
+  <h2>8. Intellectual Property</h2>
+  <p>The LoopLab name, logo, and application design are owned by LoopLab. Song recommendations are generated by AI and sourced from public knowledge. AI-generated songs created using ElevenLabs are subject to ElevenLabs' terms regarding ownership.</p>
+
+  <h2>9. Disclaimer of Warranties</h2>
+  <p>LoopLab is provided "as is" without warranties of any kind. We do not guarantee that the service will be uninterrupted, error-free, or that AI-generated content will meet your expectations.</p>
+
+  <h2>10. Limitation of Liability</h2>
+  <p>To the maximum extent permitted by law, LoopLab shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the service.</p>
+
+  <h2>11. Termination</h2>
+  <p>We reserve the right to suspend or terminate your account if you violate these terms. You may delete your account at any time by contacting us.</p>
+
+  <h2>12. Changes to Terms</h2>
+  <p>We may update these terms from time to time. Continued use of the app after changes constitutes acceptance. We will notify users of significant changes.</p>
+
+  <h2>13. Governing Law</h2>
+  <p>These terms are governed by the laws of India. Any disputes shall be resolved in the courts of Hyderabad, Telangana, India.</p>
+
+  <div class="contact">
+    <p>Questions about these Terms?<br>
+    Contact us at <a href="mailto:support@looplab.app">support@looplab.app</a></p>
+  </div>
+</div>
+</div>
+
+<script>
+  function show(page, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById(page).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo(0, 0);
+    return false;
+  }
+</script>
+
+</body>
+</html>

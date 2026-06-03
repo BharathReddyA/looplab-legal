@@ -1,241 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LoopLab — Legal</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0A0A0A;
-      color: #E5E5E5;
-      line-height: 1.7;
-    }
-    nav {
-      position: sticky; top: 0;
-      background: #0A0A0A;
-      border-bottom: 1px solid #1A1A1A;
-      padding: 16px 24px;
-      display: flex; gap: 24px; align-items: center;
-      z-index: 100;
-    }
-    nav a {
-      color: #999; text-decoration: none; font-size: 14px; font-weight: 500;
-      padding: 6px 12px; border-radius: 20px; transition: all 0.2s;
-    }
-    nav a:hover, nav a.active { background: #1A1A1A; color: #fff; }
-    .logo { font-size: 18px; font-weight: 700; color: #fff; margin-right: auto; }
-    .container { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
-    .page { display: none; }
-    .page.active { display: block; }
-    h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #fff; }
-    .updated { font-size: 13px; color: #666; margin-bottom: 40px; }
-    h2 { font-size: 18px; font-weight: 600; color: #fff; margin: 32px 0 12px; }
-    p { color: #999; margin-bottom: 16px; font-size: 15px; }
-    ul { color: #999; padding-left: 20px; margin-bottom: 16px; }
-    li { margin-bottom: 8px; font-size: 15px; }
-    a { color: #fff; }
-    .card {
-      background: #111; border: 1px solid #1A1A1A;
-      border-radius: 12px; padding: 20px 24px; margin-bottom: 16px;
-    }
-    .contact {
-      background: #111; border: 1px solid #1A1A1A;
-      border-radius: 12px; padding: 24px; margin-top: 40px; text-align: center;
-    }
-    .contact p { margin: 0; }
-    .contact a { font-weight: 600; }
-    hr { border: none; border-top: 1px solid #1A1A1A; margin: 32px 0; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LoopLab — AI Music for Every Mood</title>
+<meta name="description" content="Create AI songs, build mood playlists, and discover music that matches how you feel. LoopLab — music intelligence for everyone."/>
+<meta property="og:title" content="LoopLab — AI Music"/>
+<meta property="og:description" content="Say anything, get a song. AI-powered music for every mood, every language, every vibe."/>
+<meta name="apple-itunes-app" content="app-id=6774776556"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --saffron:  #FF6B00;
+  --gold:     #FFAA00;
+  --rose:     #E91E8C;
+  --deep:     #0D0805;
+  --ink:      #150C05;
+  --cream:    #FFF8EE;
+  --muted:    #7A6858;
+  --border:   rgba(255,107,0,0.12);
+  --ff-disp:  'Playfair Display', Georgia, serif;
+  --ff-body:  'DM Sans', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--deep);color:var(--cream);
+  font-family:var(--ff-body);overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;cursor:none;
+}
+
+/* ── Cursor ── */
+.cursor{position:fixed;width:10px;height:10px;background:var(--saffron);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(255,107,0,0.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;}
+
+/* ── Noise texture ── */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:0.5;}
+
+/* Elevate content above canvas and noise */
+header,section,footer{position:relative;z-index:2;}
+
+/* ── Nav ── */
+header{
+  position:fixed;top:0;width:100%;z-index:100;
+  padding:18px 48px;display:flex;
+  justify-content:space-between;align-items:center;
+  background:rgba(13,8,5,0.65);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-disp);font-size:1.4rem;font-weight:900;color:var(--cream);letter-spacing:-0.02em;}
+.logo-mark{width:34px;height:34px;background:var(--cream);border-radius:8px;position:relative;display:flex;align-items:flex-end;justify-content:flex-end;padding:5px;gap:2px;}
+.logo-L{position:absolute;top:3px;left:6px;font-family:var(--ff-disp);font-size:15px;font-weight:900;color:var(--deep);line-height:1;}
+.lw{width:3px;background:var(--deep);border-radius:1px;}
+.lw:nth-child(1){height:5px;}.lw:nth-child(2){height:10px;}.lw:nth-child(3){height:15px;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-size:0.875rem;font-weight:500;color:var(--muted);transition:color 0.2s;text-decoration:none;}
+.nav-links a:hover{color:var(--cream);}
+.nav-dl{
+  background:var(--saffron);color:var(--deep)!important;
+  padding:9px 22px;border-radius:50px;font-weight:700!important;
+  transition:transform 0.2s,box-shadow 0.2s!important;
+}
+.nav-dl:hover{transform:scale(1.04)!important;box-shadow:0 0 24px rgba(255,107,0,0.4)!important;}
+
+/* ── Hero ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:160px 24px 100px;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.22);
+  border-radius:50px;padding:6px 16px;
+  font-size:0.72rem;font-weight:600;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--saffron);margin-bottom:36px;
+}
+.eyebrow-pulse{width:6px;height:6px;border-radius:50%;background:var(--saffron);animation:pdot 2s ease-in-out infinite;}
+@keyframes pdot{0%,100%{transform:scale(1);}50%{transform:scale(1.6);opacity:0.5;}}
+.hero h1{
+  font-family:var(--ff-disp);
+  font-size:clamp(3.2rem,8.5vw,7.5rem);
+  font-weight:900;line-height:0.93;
+  letter-spacing:-0.03em;margin-bottom:32px;
+}
+.hero h1 em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--saffron) 0%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:clamp(1rem,2vw,1.25rem);
+  color:var(--muted);max-width:500px;
+  margin:0 auto 52px;line-height:1.65;font-weight:300;
+}
+.cta-group{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-p{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--saffron);color:var(--deep);
+  padding:15px 30px;border-radius:50px;font-weight:700;font-size:0.95rem;
+  box-shadow:0 4px 32px rgba(255,107,0,0.28);
+  transition:transform 0.2s,box-shadow 0.2s;text-decoration:none;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(255,107,0,0.42);}
+.btn-s{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;color:var(--cream);
+  padding:15px 30px;border-radius:50px;font-weight:600;font-size:0.95rem;
+  border:1.5px solid rgba(255,248,238,0.18);
+  transition:border-color 0.2s,background 0.2s;text-decoration:none;
+}
+.btn-s:hover{border-color:rgba(255,248,238,0.45);background:rgba(255,248,238,0.04);}
+.bi{width:19px;height:19px;fill:currentColor;flex-shrink:0;}
+
+/* ── Marquee ── */
+.marquee{
+  overflow:hidden;border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:rgba(255,107,0,0.03);padding:20px 0;
+}
+.mtrack{
+  display:flex;white-space:nowrap;
+  animation:mq 28s linear infinite;
+}
+.mtrack:hover{animation-play-state:paused;}
+.mitem{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:0 28px;font-size:0.8rem;font-weight:500;
+  color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;
+}
+.mdot{width:4px;height:4px;border-radius:50%;background:var(--saffron);flex-shrink:0;}
+@keyframes mq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── Shared section styles ── */
+.wrap{max-width:1160px;margin:0 auto;padding:0 40px;}
+.stag{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--saffron);margin-bottom:14px;}
+.stitle{font-family:var(--ff-disp);font-size:clamp(2rem,5vw,3.6rem);font-weight:900;line-height:1.05;letter-spacing:-0.025em;margin-bottom:18px;}
+.ssub{font-size:1.05rem;color:var(--muted);max-width:480px;line-height:1.68;font-weight:300;}
+
+/* ── How it works ── */
+.how{padding:120px 0;}
+.how-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;margin-top:68px;
+  border:1px solid var(--border);border-radius:24px;overflow:hidden;
+}
+.how-step{
+  padding:44px 36px;
+  background:rgba(255,248,238,0.015);
+  border-right:1px solid var(--border);
+  transition:background 0.3s;
+}
+.how-step:last-child{border-right:none;}
+.how-step:hover{background:rgba(255,107,0,0.04);}
+.how-n{
+  font-family:var(--ff-disp);font-size:4.5rem;font-weight:900;line-height:1;
+  margin-bottom:22px;
+  background:linear-gradient(135deg,rgba(255,107,0,0.28),rgba(255,107,0,0.04));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.how-step h3{font-size:1.15rem;font-weight:700;margin-bottom:10px;color:var(--cream);}
+.how-step p{font-size:0.875rem;color:var(--muted);line-height:1.72;}
+
+/* ── Features bento ── */
+.features{padding:80px 0 120px;}
+.bento{
+  display:grid;grid-template-columns:repeat(12,1fr);
+  gap:14px;margin-top:68px;
+}
+.bc{
+  background:rgba(255,248,238,0.025);
+  border:1px solid var(--border);border-radius:18px;
+  padding:32px;transition:border-color 0.3s,transform 0.3s,background 0.3s;
+  position:relative;overflow:hidden;
+}
+.bc::before{
+  content:'';position:absolute;inset:0;border-radius:18px;
+  background:radial-gradient(circle at 0% 0%,rgba(255,107,0,0.07),transparent 55%);
+  opacity:0;transition:opacity 0.3s;
+}
+.bc:hover::before{opacity:1;}
+.bc:hover{border-color:rgba(255,107,0,0.28);transform:translateY(-3px);background:rgba(255,248,238,0.04);}
+.bc-1{grid-column:span 7;}
+.bc-2{grid-column:span 5;}
+.bc-3{grid-column:span 4;}
+.bc-4{grid-column:span 4;}
+.bc-5{grid-column:span 4;}
+.bc-6{grid-column:span 6;}
+.bc-7{grid-column:span 6;}
+.bico{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:20px;background:rgba(255,107,0,0.1);}
+.bc h3{font-size:1.1rem;font-weight:700;color:var(--cream);margin-bottom:9px;}
+.bc p{font-size:0.855rem;color:var(--muted);line-height:1.72;}
+.bnum{font-family:var(--ff-disp);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:900;line-height:1;background:linear-gradient(135deg,var(--saffron),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
+.lang-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+.lp{padding:4px 13px;border-radius:50px;font-size:0.72rem;font-weight:600;background:rgba(255,107,0,0.09);border:1px solid rgba(255,107,0,0.18);color:var(--saffron);}
+
+/* ── Moods ── */
+.moods{padding:80px 0 120px;}
+.moods-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:52px;}
+.mcard{
+  padding:26px 16px;border-radius:14px;text-align:center;
+  cursor:pointer;border:1px solid transparent;
+  transition:transform 0.22s,box-shadow 0.22s;
+}
+.mcard:hover{transform:translateY(-5px);}
+.mcard .me{font-size:2.2rem;margin-bottom:10px;display:block;}
+.mcard h4{font-size:0.9rem;font-weight:700;margin-bottom:3px;}
+.mcard p{font-size:0.72rem;opacity:0.65;}
+.mc-h{background:rgba(255,107,0,0.09);border-color:rgba(255,107,0,0.18);}
+.mc-h:hover{box-shadow:0 8px 36px rgba(255,107,0,0.18);}
+.mc-r{background:rgba(233,30,140,0.09);border-color:rgba(233,30,140,0.18);}
+.mc-r:hover{box-shadow:0 8px 36px rgba(233,30,140,0.18);}
+.mc-s{background:rgba(100,126,234,0.09);border-color:rgba(100,126,234,0.18);}
+.mc-s:hover{box-shadow:0 8px 36px rgba(100,126,234,0.18);}
+.mc-e{background:rgba(255,0,80,0.09);border-color:rgba(255,0,80,0.18);}
+.mc-e:hover{box-shadow:0 8px 36px rgba(255,0,80,0.18);}
+.mc-c{background:rgba(0,191,165,0.09);border-color:rgba(0,191,165,0.18);}
+.mc-c:hover{box-shadow:0 8px 36px rgba(0,191,165,0.18);}
+.mc-n{background:rgba(197,72,74,0.09);border-color:rgba(197,72,74,0.18);}
+.mc-n:hover{box-shadow:0 8px 36px rgba(197,72,74,0.18);}
+
+/* ── Download CTA ── */
+.dl-cta{
+  padding:130px 0;text-align:center;
+  background:linear-gradient(180deg,transparent,rgba(255,107,0,0.05),transparent);
+}
+.dl-cta .stitle{margin-bottom:10px;}
+.dl-cta .ssub{margin:0 auto 48px;}
+.store-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.sbtn{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:14px 26px;border-radius:13px;font-weight:600;
+  transition:transform 0.2s,box-shadow 0.2s;text-decoration:none;
+}
+.sbtn-ios{background:var(--cream);color:var(--deep);}
+.sbtn-ios:hover{transform:scale(1.03);box-shadow:0 8px 28px rgba(255,248,238,0.12);}
+.sbtn-and{background:transparent;color:var(--cream);border:1.5px solid rgba(255,248,238,0.18);}
+.sbtn-and:hover{transform:scale(1.03);border-color:rgba(255,248,238,0.45);}
+.sbtn svg{width:21px;height:21px;fill:currentColor;flex-shrink:0;}
+.sbl{display:flex;flex-direction:column;text-align:left;}
+.sbl-sm{font-size:0.63rem;font-weight:400;opacity:0.65;}
+.sbl-lg{font-size:0.95rem;font-weight:700;line-height:1.2;}
+.dl-note{font-size:0.78rem;color:var(--muted);}
+
+/* ── Footer ── */
+footer{border-top:1px solid var(--border);padding:56px 0;}
+.fi{max-width:1160px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;}
+.fb p{font-size:0.855rem;color:var(--muted);line-height:1.72;margin:14px 0 0;max-width:240px;}
+.fc h5{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
+.fc a{display:block;font-size:0.855rem;color:rgba(255,248,238,0.55);margin-bottom:11px;transition:color 0.2s;text-decoration:none;}
+.fc a:hover{color:var(--cream);}
+.fb-bot{max-width:1160px;margin:36px auto 0;padding:22px 40px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:var(--muted);}
+
+/* ── Reveal ── */
+.rev{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.rev.vis{opacity:1;transform:translateY(0);}
+
+/* ── Mobile ── */
+@media(max-width:768px){
+  header{padding:16px 20px;}
+  .nav-links{display:none;}
+  .wrap{padding:0 20px;}
+  .how-grid{grid-template-columns:1fr;}
+  .how-step{border-right:none;border-bottom:1px solid var(--border);}
+  .bento{grid-template-columns:1fr;}
+  .bc-1,.bc-2,.bc-3,.bc-4,.bc-5,.bc-6,.bc-7{grid-column:span 1;}
+  .moods-grid{grid-template-columns:repeat(3,1fr);}
+  .fi{grid-template-columns:1fr 1fr;}
+  .fb-bot{flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
 </head>
 <body>
 
-<nav>
-  <span class="logo">LoopLab</span>
-  <a href="#" class="active" onclick="show('privacy', this)">Privacy Policy</a>
-  <a href="#" onclick="show('terms', this)">Terms of Service</a>
-</nav>
-
-<!-- PRIVACY POLICY -->
-<div class="container">
-<div id="privacy" class="page active">
-  <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: May 29, 2026</p>
-
-  <p>LoopLab ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use the LoopLab mobile application.</p>
-
-  <h2>1. Information We Collect</h2>
-  <div class="card">
-    <p><strong style="color:#fff">Account Information</strong><br>
-    When you create an account, we collect your name, email address, and a hashed (encrypted) password.</p>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cring"></div>
+<!-- ── Nav ── -->
+<header>
+  <div class="logo">
+    <div class="logo-mark">
+      <span class="logo-L">L</span>
+      <div class="lw"></div><div class="lw"></div><div class="lw"></div>
+    </div>
+    LoopLab
   </div>
-  <div class="card">
-    <p><strong style="color:#fff">Platform Connections</strong><br>
-    If you connect Spotify or YouTube Music, we receive an access token to read and create playlists on your behalf. We do not store your Spotify or Google passwords.</p>
+  <nav class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#moods">Moods</a>
+    <a href="https://apps.apple.com/app/id6774776556" class="nav-dl">Download</a>
+  </nav>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="eyebrow">
+    <span class="eyebrow-pulse"></span>
+    Now on iOS &amp; Android · Free
   </div>
-  <div class="card">
-    <p><strong style="color:#fff">Usage Data</strong><br>
-    We collect playlists you generate, songs you create, and preferences you set within the app. This is stored securely in our database.</p>
+  <h1>Music that <em>moves</em><br/>with you.</h1>
+  <p class="hero-sub">Generate original AI songs, build mood playlists, and discover music that matches exactly how you feel — in any language, any genre, any moment.</p>
+  <div class="cta-group">
+    <a href="https://apps.apple.com/app/id6774776556" class="btn-p">
+      <svg class="bi" viewBox="0 0 24 24"><path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.48C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/></svg>
+      App Store
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.looplab.app" class="btn-s">
+      <svg class="bi" viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+      Google Play
+    </a>
   </div>
-  <div class="card">
-    <p><strong style="color:#fff">Audio Content</strong><br>
-    AI-generated songs are uploaded to Cloudinary (a secure cloud storage service) and linked to your account.</p>
-  </div>
-  <div class="card">
-    <p><strong style="color:#fff">Voice Input</strong><br>
-    If you use the voice input feature, audio is temporarily processed by Google Gemini for transcription and is not stored by us.</p>
-  </div>
+</section>
 
-  <h2>2. How We Use Your Information</h2>
-  <ul>
-    <li>To provide and improve the LoopLab service</li>
-    <li>To generate AI playlists and songs personalized to your preferences</li>
-    <li>To sync playlists to your connected Spotify or YouTube Music account</li>
-    <li>To display your saved songs and playlists in your profile</li>
-    <li>To enable the Discover feature where you can share playlists publicly</li>
-  </ul>
-
-  <h2>3. Third-Party Services</h2>
-  <p>LoopLab uses the following third-party services:</p>
-  <ul>
-    <li><strong style="color:#fff">Spotify API</strong> — to read and create playlists</li>
-    <li><strong style="color:#fff">YouTube Data API</strong> — to read and create playlists</li>
-    <li><strong style="color:#fff">Google Gemini AI</strong> — to generate playlist recommendations and transcribe voice input</li>
-    <li><strong style="color:#fff">ElevenLabs</strong> — to generate AI music</li>
-    <li><strong style="color:#fff">Cloudinary</strong> — to store generated audio files</li>
-    <li><strong style="color:#fff">MongoDB Atlas</strong> — to store user data securely</li>
-    <li><strong style="color:#fff">Railway</strong> — to host our backend services</li>
-  </ul>
-  <p>Each of these services has their own privacy policies. We encourage you to review them.</p>
-
-  <h2>4. Data Sharing</h2>
-  <p>We do not sell, trade, or rent your personal information to third parties. We only share data with the third-party services listed above as necessary to provide the LoopLab service.</p>
-  <p>If you make a playlist public in the Discover section, other LoopLab users will be able to see it. You can change visibility to private at any time from your Profile tab.</p>
-
-  <h2>5. Data Security</h2>
-  <p>We implement industry-standard security measures including encrypted passwords (bcrypt), JWT authentication tokens, and HTTPS for all data transmission. Access tokens for Spotify and Google are stored securely on your device using encrypted storage.</p>
-
-  <h2>6. Data Retention</h2>
-  <p>We retain your data for as long as your account is active. You may request deletion of your account and associated data by contacting us at the email below.</p>
-
-  <h2>7. Children's Privacy</h2>
-  <p>LoopLab is not intended for children under 13. We do not knowingly collect personal information from children under 13. If you believe we have collected such information, please contact us immediately.</p>
-
-  <h2>8. Your Rights</h2>
-  <ul>
-    <li>Access the personal data we hold about you</li>
-    <li>Request correction of inaccurate data</li>
-    <li>Request deletion of your data</li>
-    <li>Disconnect Spotify or YouTube Music at any time from your Profile</li>
-    <li>Make your playlists private or delete them at any time</li>
-  </ul>
-
-  <h2>9. Changes to This Policy</h2>
-  <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the "Last updated" date above. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
-
-  <div class="contact">
-    <p>Questions about this Privacy Policy?<br>
-    Contact us at <a href="mailto:support@looplab.app">support@looplab.app</a></p>
+<!-- ── Marquee ── -->
+<div class="marquee">
+  <div class="mtrack">
+    <span class="mitem"><span class="mdot"></span>Pop</span>
+    <span class="mitem"><span class="mdot"></span>Hip Hop</span>
+    <span class="mitem"><span class="mdot"></span>R&amp;B</span>
+    <span class="mitem"><span class="mdot"></span>Electronic</span>
+    <span class="mitem"><span class="mdot"></span>Lo-fi</span>
+    <span class="mitem"><span class="mdot"></span>Jazz</span>
+    <span class="mitem"><span class="mdot"></span>Classical</span>
+    <span class="mitem"><span class="mdot"></span>Folk</span>
+    <span class="mitem"><span class="mdot"></span>Bollywood</span>
+    <span class="mitem"><span class="mdot"></span>K-Pop</span>
+    <span class="mitem"><span class="mdot"></span>Afrobeats</span>
+    <span class="mitem"><span class="mdot"></span>Latin</span>
+    <span class="mitem"><span class="mdot"></span>Reggae</span>
+    <span class="mitem"><span class="mdot"></span>Soul</span>
+    <span class="mitem"><span class="mdot"></span>Ambient</span>
+    <span class="mitem"><span class="mdot"></span>Pop</span>
+    <span class="mitem"><span class="mdot"></span>Hip Hop</span>
+    <span class="mitem"><span class="mdot"></span>R&amp;B</span>
+    <span class="mitem"><span class="mdot"></span>Electronic</span>
+    <span class="mitem"><span class="mdot"></span>Lo-fi</span>
+    <span class="mitem"><span class="mdot"></span>Jazz</span>
+    <span class="mitem"><span class="mdot"></span>Classical</span>
+    <span class="mitem"><span class="mdot"></span>Folk</span>
+    <span class="mitem"><span class="mdot"></span>Bollywood</span>
+    <span class="mitem"><span class="mdot"></span>K-Pop</span>
+    <span class="mitem"><span class="mdot"></span>Afrobeats</span>
+    <span class="mitem"><span class="mdot"></span>Latin</span>
+    <span class="mitem"><span class="mdot"></span>Reggae</span>
+    <span class="mitem"><span class="mdot"></span>Soul</span>
+    <span class="mitem"><span class="mdot"></span>Ambient</span>
   </div>
 </div>
 
-<!-- TERMS OF SERVICE -->
-<div id="terms" class="page">
-  <h1>Terms of Service</h1>
-  <p class="updated">Last updated: May 29, 2026</p>
-
-  <p>Please read these Terms of Service carefully before using the LoopLab application. By using LoopLab, you agree to be bound by these terms.</p>
-
-  <h2>1. Acceptance of Terms</h2>
-  <p>By downloading, installing, or using LoopLab, you agree to these Terms of Service and our Privacy Policy. If you do not agree, do not use the app.</p>
-
-  <h2>2. Description of Service</h2>
-  <p>LoopLab is an AI-powered music application that allows users to:</p>
-  <ul>
-    <li>Generate AI playlists based on genre, mood, occasion, or conversation</li>
-    <li>Convert playlists between Spotify and YouTube Music</li>
-    <li>Create original AI-generated songs using ElevenLabs music generation</li>
-    <li>Save and share playlists with the LoopLab community</li>
-  </ul>
-
-  <h2>3. User Accounts</h2>
-  <p>You must create an account to use LoopLab. You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account.</p>
-  <p>You must provide accurate information when creating your account. You may not create accounts for others or use the service to impersonate others.</p>
-
-  <h2>4. AI-Generated Content</h2>
-  <p>LoopLab uses artificial intelligence to generate playlists and songs. By using these features:</p>
-  <ul>
-    <li>You acknowledge that AI-generated content may not always be accurate or appropriate</li>
-    <li>AI-generated songs are original compositions — you own the songs you create within the app subject to ElevenLabs' terms of service</li>
-    <li>You may not use AI-generated content for commercial purposes without verifying ownership rights</li>
-    <li>We are not responsible for the quality, accuracy, or fitness for purpose of AI-generated content</li>
-  </ul>
-
-  <h2>5. Third-Party Platform Integration</h2>
-  <p>LoopLab integrates with Spotify and YouTube Music. By connecting these accounts:</p>
-  <ul>
-    <li>You authorize LoopLab to access and create playlists on your behalf</li>
-    <li>You remain bound by Spotify's and Google's respective Terms of Service</li>
-    <li>We are not affiliated with or endorsed by Spotify or Google/YouTube</li>
-    <li>Third-party platform availability and API access may change without notice</li>
-  </ul>
-
-  <h2>6. Acceptable Use</h2>
-  <p>You agree not to:</p>
-  <ul>
-    <li>Use the service for any illegal purpose</li>
-    <li>Attempt to reverse engineer, hack, or compromise the service</li>
-    <li>Upload harmful, offensive, or inappropriate content</li>
-    <li>Abuse the AI generation features to create content that violates copyright</li>
-    <li>Use automated tools to access the service excessively</li>
-    <li>Share another user's private playlists without permission</li>
-  </ul>
-
-  <h2>7. Community Discover Feature</h2>
-  <p>When you make a playlist public in the Discover section:</p>
-  <ul>
-    <li>Other users can view and convert your playlist</li>
-    <li>You grant LoopLab a non-exclusive license to display your playlist title and song list</li>
-    <li>You can make your playlist private or delete it at any time</li>
-    <li>You are responsible for ensuring playlists you share do not violate any third-party rights</li>
-  </ul>
-
-  <h2>8. Intellectual Property</h2>
-  <p>The LoopLab name, logo, and application design are owned by LoopLab. Song recommendations are generated by AI and sourced from public knowledge. AI-generated songs created using ElevenLabs are subject to ElevenLabs' terms regarding ownership.</p>
-
-  <h2>9. Disclaimer of Warranties</h2>
-  <p>LoopLab is provided "as is" without warranties of any kind. We do not guarantee that the service will be uninterrupted, error-free, or that AI-generated content will meet your expectations.</p>
-
-  <h2>10. Limitation of Liability</h2>
-  <p>To the maximum extent permitted by law, LoopLab shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the service.</p>
-
-  <h2>11. Termination</h2>
-  <p>We reserve the right to suspend or terminate your account if you violate these terms. You may delete your account at any time by contacting us.</p>
-
-  <h2>12. Changes to Terms</h2>
-  <p>We may update these terms from time to time. Continued use of the app after changes constitutes acceptance. We will notify users of significant changes.</p>
-
-  <h2>13. Governing Law</h2>
-  <p>These terms are governed by the laws of India. Any disputes shall be resolved in the courts of Hyderabad, Telangana, India.</p>
-
-  <div class="contact">
-    <p>Questions about these Terms?<br>
-    Contact us at <a href="mailto:support@looplab.app">support@looplab.app</a></p>
+<!-- ── How it works ── -->
+<section class="how" id="how">
+  <div class="wrap">
+    <span class="stag rev">How it works</span>
+    <h2 class="stitle rev">From thought<br/>to song in seconds.</h2>
+    <div class="how-grid rev">
+      <div class="how-step">
+        <div class="how-n">01</div>
+        <h3>Describe your moment</h3>
+        <p>Type or say anything — a feeling, a story, a place, a person. LoopLab understands context, emotion and culture in any language.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-n">02</div>
+        <h3>AI composes instantly</h3>
+        <p>Powered by Gemini and ElevenLabs, LoopLab generates a full original song — complete with lyrics, melody and vocals — tailored to your prompt.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-n">03</div>
+        <h3>Save, share &amp; discover</h3>
+        <p>Keep songs in your profile, share them with a link, or push playlists directly to Spotify and YouTube Music.</p>
+      </div>
+    </div>
   </div>
-</div>
-</div>
+</section>
+
+<!-- ── Features ── -->
+<section class="features" id="features">
+  <div class="wrap">
+    <span class="stag rev">Features</span>
+    <h2 class="stitle rev">Everything you need.<br/>Nothing you don't.</h2>
+    <div class="bento">
+      <div class="bc bc-1 rev">
+        <div class="bico">⚡</div>
+        <div class="bnum">Quick Song</div>
+        <h3>Say anything. Get a song.</h3>
+        <p>One sentence is all it takes. Funny, emotional, educational or completely random — LoopLab turns any prompt into a full original track in under 30 seconds.</p>
+      </div>
+      <div class="bc bc-2 rev">
+        <div class="bico">🎧</div>
+        <h3>Mood Playlists</h3>
+        <p>Pick your genre, mood or occasion. LoopLab assembles a curated playlist instantly and pushes it to Spotify or YouTube Music in one tap.</p>
+      </div>
+      <div class="bc bc-3 rev">
+        <div class="bico">🔄</div>
+        <h3>Convert Playlists</h3>
+        <p>Transfer any playlist between Spotify and YouTube Music seamlessly. No re-adding songs manually.</p>
+      </div>
+      <div class="bc bc-4 rev">
+        <div class="bico">🎉</div>
+        <h3>Party Mode</h3>
+        <p>Mark drop timestamps at every peak moment. Built for DJs, hosts and anyone running a room.</p>
+      </div>
+      <div class="bc bc-5 rev">
+        <div class="bico">🌍</div>
+        <h3>Discover</h3>
+        <p>Browse public playlists from the global LoopLab community. Save what you love to your own profile.</p>
+      </div>
+      <div class="bc bc-6 rev">
+        <div class="bico">🗣️</div>
+        <h3>17 Languages</h3>
+        <p>Create songs in English, Spanish, Hindi, French, Korean, Arabic, Portuguese and more. LoopLab generates authentic lyrics in your language — not translations.</p>
+        <div class="lang-pills">
+          <span class="lp">English</span><span class="lp">Spanish</span>
+          <span class="lp">Hindi</span><span class="lp">French</span>
+          <span class="lp">Korean</span><span class="lp">Arabic</span>
+          <span class="lp">+11 more</span>
+        </div>
+      </div>
+      <div class="bc bc-7 rev">
+        <div class="bico">🎼</div>
+        <h3>Instrument Vibe Picker</h3>
+        <p>Add piano, guitar, tabla, violin or any instrument as a style influence. LoopLab blends it naturally into the composition without locking out everything else.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Moods ── -->
+<section class="moods" id="moods">
+  <div class="wrap">
+    <span class="stag rev">Mood Engine</span>
+    <h2 class="stitle rev">What's your<br/><em style="font-family:var(--ff-disp);font-style:italic;background:linear-gradient(135deg,var(--saffron),var(--rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">vibe</em> right now?</h2>
+    <p class="ssub rev">LoopLab understands 12 distinct moods and generates music that genuinely matches how you feel — not just what you typed.</p>
+    <div class="moods-grid rev">
+      <div class="mcard mc-h" data-mood="happy"><span class="me">😊</span><h4>Happy</h4><p>Bright &amp; uplifting</p></div>
+      <div class="mcard mc-r" data-mood="romantic"><span class="me">💕</span><h4>Romantic</h4><p>Warm &amp; intimate</p></div>
+      <div class="mcard mc-s" data-mood="sad"><span class="me">🌧️</span><h4>Sad</h4><p>Deep &amp; emotional</p></div>
+      <div class="mcard mc-e" data-mood="energetic"><span class="me">⚡</span><h4>Energetic</h4><p>High &amp; pumped</p></div>
+      <div class="mcard mc-c" data-mood="calm"><span class="me">🌊</span><h4>Calm</h4><p>Peaceful &amp; soft</p></div>
+      <div class="mcard mc-n" data-mood="nostalgic"><span class="me">🌅</span><h4>Nostalgic</h4><p>Warm memories</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Download CTA ── -->
+<section class="dl-cta">
+  <div class="wrap">
+    <span class="stag rev">Get started free</span>
+    <h2 class="stitle rev">Your music.<br/>Your moment.<br/><em style="font-family:var(--ff-disp);font-style:italic;background:linear-gradient(135deg,var(--saffron),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Your song.</em></h2>
+    <p class="ssub rev">Download LoopLab free. Create your first AI song in under 60 seconds.</p>
+    <div class="store-row rev">
+      <a href="https://apps.apple.com/app/id6774776556" class="sbtn sbtn-ios">
+        <svg viewBox="0 0 24 24"><path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.48C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/></svg>
+        <div class="sbl"><span class="sbl-sm">Download on the</span><span class="sbl-lg">App Store</span></div>
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=com.looplab.app" class="sbtn sbtn-and">
+        <svg viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+        <div class="sbl"><span class="sbl-sm">Get it on</span><span class="sbl-lg">Google Play</span></div>
+      </a>
+    </div>
+    <p class="dl-note rev">Free to download · iOS 15.1+ · Android 7.0+</p>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="fi">
+    <div class="fb">
+      <div class="logo">
+        <div class="logo-mark"><span class="logo-L">L</span><div class="lw"></div><div class="lw"></div><div class="lw"></div></div>
+        LoopLab
+      </div>
+      <p>AI-powered music for every mood, every language, every moment. Built for music lovers everywhere.</p>
+    </div>
+    <div class="fc">
+      <h5>Product</h5>
+      <a href="#features">Features</a>
+      <a href="#moods">Mood Engine</a>
+      <a href="#how">How it works</a>
+    </div>
+    <div class="fc">
+      <h5>Download</h5>
+      <a href="https://apps.apple.com/app/id6774776556">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.looplab.app">Google Play</a>
+    </div>
+    <div class="fc">
+      <h5>Legal</h5>
+      <a href="https://bharathreddya.github.io/looplab-legal/privacy">Privacy Policy</a>
+      <a href="https://bharathreddya.github.io/looplab-legal/terms">Terms of Service</a>
+      <a href="mailto:bharath.alluri389@gmail.com">Contact</a>
+    </div>
+  </div>
+  <div class="fb-bot">
+    <span>© 2026 LoopLab AI Music · com.looplab.app</span>
+    <span>Built for music lovers everywhere</span>
+  </div>
+</footer>
 
 <script>
-  function show(page, el) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-    document.getElementById(page).classList.add('active');
-    el.classList.add('active');
-    window.scrollTo(0, 0);
-    return false;
-  }
-</script>
+// ── Cursor ────────────────────────────────────────────────────────────────────
+const cur=document.getElementById('cursor'),cring=document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function anim(){
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+  rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;
+  cring.style.left=rx+'px';cring.style.top=ry+'px';
+  requestAnimationFrame(anim);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2)';cring.style.width='56px';cring.style.height='56px';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';cring.style.width='32px';cring.style.height='32px';});
+});
 
+
+
+// ── Mood cards change wave color ──────────────────────────────────────────────
+document.querySelectorAll('.mcard').forEach(card=>{
+  const mood=card.dataset.mood;
+  card.addEventListener('mouseenter',()=>{if(MOOD_C[mood])tr={...MOOD_C[mood]};});
+  card.addEventListener('mouseleave',()=>{tr={r:255,g:107,b:0};});
+});
+
+// ── Scroll reveal ─────────────────────────────────────────────────────────────
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:0.1});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
