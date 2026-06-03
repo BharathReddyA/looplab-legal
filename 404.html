@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoopLab — AI Music</title>
+  <script>
+    // Redirect /song/ID to /song/?id=ID so index.html can read it
+    const path = window.location.pathname;
+    const parts = path.split('/').filter(Boolean);
+
+    // /looplab-legal/song/SONG_ID → redirect to /looplab-legal/song/?id=SONG_ID
+    if (parts.includes('song') && parts[parts.length - 1] !== 'song') {
+      const songId = parts[parts.length - 1];
+      window.location.replace(
+        '/looplab-legal/song/?id=' + songId
+      );
+    } else {
+      // Unknown path — go to main page
+      window.location.replace('/looplab-legal/');
+    }
+  </script>
+</head>
+<body></body>
+</html>
