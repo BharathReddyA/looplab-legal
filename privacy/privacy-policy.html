@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — LoopLab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #0f0f0f;
+      --border: #1c1c1c;
+      --border-light: #242424;
+      --text: #e8e8e8;
+      --muted: #888;
+      --dim: #555;
+      --accent: #ffffff;
+      --tag-bg: #161616;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex; align-items: center; gap: 0;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 17px;
+      color: #fff; text-decoration: none;
+      margin-right: auto; letter-spacing: -0.3px;
+    }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      padding: 6px 14px; border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--surface); }
+    .nav-links a.active { color: #fff; background: var(--border-light); }
+
+    /* HERO */
+    .hero {
+      border-bottom: 1px solid var(--border);
+      padding: 64px 32px 48px;
+      max-width: 800px; margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--tag-bg); border: 1px solid var(--border-light);
+      border-radius: 20px; padding: 4px 12px;
+      font-size: 11px; font-weight: 500; color: var(--dim);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-tag span { width: 5px; height: 5px; border-radius: 50%; background: var(--dim); display: inline-block; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 800; color: #fff;
+      letter-spacing: -1.5px; line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero-meta {
+      font-size: 13px; color: var(--dim);
+      display: flex; gap: 20px; align-items: center;
+      flex-wrap: wrap;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* LAYOUT */
+    .layout {
+      max-width: 800px; margin: 0 auto;
+      padding: 0 32px 80px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 48px;
+      align-items: start;
+    }
+
+    /* SIDEBAR TOC */
+    .toc {
+      position: sticky; top: 72px;
+      padding: 32px 0;
+      border-right: 1px solid var(--border);
+      padding-right: 24px;
+    }
+    .toc-label {
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--dim); font-weight: 600; margin-bottom: 12px;
+    }
+    .toc a {
+      display: block; font-size: 12.5px; color: var(--muted);
+      text-decoration: none; padding: 5px 0;
+      border-left: 2px solid transparent;
+      padding-left: 10px; margin-left: -12px;
+      transition: color 0.15s, border-color 0.15s;
+      line-height: 1.4;
+    }
+    .toc a:hover { color: var(--text); border-left-color: var(--border-light); }
+    .toc a.active { color: #fff; border-left-color: #fff; }
+
+    /* CONTENT */
+    .content { padding: 32px 0; }
+
+    section { margin-bottom: 48px; scroll-margin-top: 80px; }
+
+    .section-num {
+      font-size: 11px; font-weight: 600; color: var(--dim);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px; font-weight: 700;
+      color: #fff; letter-spacing: -0.4px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    p { font-size: 14.5px; color: var(--muted); margin-bottom: 14px; line-height: 1.8; }
+    p:last-child { margin-bottom: 0; }
+
+    ul { list-style: none; margin-bottom: 14px; }
+    li {
+      font-size: 14px; color: var(--muted);
+      padding: 6px 0 6px 16px;
+      border-bottom: 1px solid var(--border);
+      position: relative; line-height: 1.6;
+    }
+    li:last-child { border-bottom: none; }
+    li::before {
+      content: '';
+      position: absolute; left: 0; top: 14px;
+      width: 4px; height: 4px;
+      border-radius: 50%; background: var(--dim);
+    }
+    strong { color: var(--text); font-weight: 500; }
+
+    /* DATA CARDS */
+    .data-grid { display: grid; gap: 2px; margin-bottom: 14px; }
+    .data-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: start; gap: 8px;
+      transition: border-color 0.15s;
+    }
+    .data-card:hover { border-color: var(--border-light); }
+    .data-card-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+    .data-card-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+    .data-card-badge {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; padding: 3px 8px;
+      border-radius: 4px; white-space: nowrap;
+    }
+    .badge-stored { background: #1a2a1a; color: #4a8c4a; border: 1px solid #2a3e2a; }
+    .badge-transient { background: #1a1a2a; color: #4a4a8c; border: 1px solid #2a2a3e; }
+    .badge-token { background: #2a1a1a; color: #8c4a4a; border: 1px solid #3e2a2a; }
+
+    /* SERVICE TABLE */
+    .service-list { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .service-row {
+      display: grid; grid-template-columns: 160px 1fr;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+    .service-row:last-child { border-bottom: none; }
+    .service-row:hover { background: var(--surface); }
+    .service-name {
+      padding: 12px 16px;
+      font-size: 12.5px; font-weight: 500; color: var(--text);
+      border-right: 1px solid var(--border);
+    }
+    .service-purpose {
+      padding: 12px 16px;
+      font-size: 12.5px; color: var(--muted);
+    }
+
+    /* RIGHTS GRID */
+    .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .right-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px 16px;
+      font-size: 13px; color: var(--muted);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .right-icon { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+
+    /* CONTACT */
+    .contact-block {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 28px;
+      text-align: center; margin-top: 8px;
+    }
+    .contact-block p { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+    .contact-block a {
+      color: #fff; font-weight: 500; font-size: 14px;
+      text-decoration: none;
+      background: var(--border-light); border: 1px solid var(--border-light);
+      padding: 8px 20px; border-radius: 6px; display: inline-block;
+      transition: background 0.15s;
+    }
+    .contact-block a:hover { background: #2a2a2a; }
+
+    @media (max-width: 640px) {
+      .layout { grid-template-columns: 1fr; padding: 0 20px 60px; }
+      .toc { display: none; }
+      .hero { padding: 40px 20px 36px; }
+      .rights-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">LoopLab</a>
+  <div class="nav-links">
+    <a href="privacy-policy.html" class="active">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag"><span></span>Legal Document</div>
+  <h1>Privacy Policy</h1>
+  <div class="hero-meta">
+    <span>Last updated: May 29, 2026</span>
+    <span>Effective: May 29, 2026</span>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- TOC -->
+  <aside class="toc">
+    <div class="toc-label">Contents</div>
+    <a href="#collection" class="active">1. Data we collect</a>
+    <a href="#use">2. How we use it</a>
+    <a href="#third-party">3. Third-party services</a>
+    <a href="#sharing">4. Data sharing</a>
+    <a href="#security">5. Security</a>
+    <a href="#retention">6. Retention</a>
+    <a href="#children">7. Children's privacy</a>
+    <a href="#rights">8. Your rights</a>
+    <a href="#ccpa">9. California rights</a>
+    <a href="#changes">10. Policy changes</a>
+    <a href="#contact">Contact</a>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+    <p>LoopLab ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use the LoopLab mobile application.</p>
+
+    <section id="collection">
+      <div class="section-num">01</div>
+      <h2>Information We Collect</h2>
+      <div class="data-grid">
+        <div class="data-card">
+          <div>
+            <div class="data-card-title">Account Information</div>
+            <div class="data-card-desc">Your name, email address, and a bcrypt-hashed password when you register.</div>
+          </div>
+          <span class="data-card-badge badge-stored">Stored</span>
+        </div>
+        <div class="data-card">
+          <div>
+            <div class="data-card-title">Platform OAuth Tokens</div>
+            <div class="data-card-desc">Access and refresh tokens when you connect Spotify or YouTube Music. We never store your platform passwords.</div>
+          </div>
+          <span class="data-card-badge badge-token">Token only</span>
+        </div>
+        <div class="data-card">
+          <div>
+            <div class="data-card-title">Usage & Preferences</div>
+            <div class="data-card-desc">Playlists you generate, songs you create, and in-app preferences such as mood and instrument selections.</div>
+          </div>
+          <span class="data-card-badge badge-stored">Stored</span>
+        </div>
+        <div class="data-card">
+          <div>
+            <div class="data-card-title">AI-Generated Audio</div>
+            <div class="data-card-desc">Songs generated by ElevenLabs are uploaded to Cloudinary and linked to your account.</div>
+          </div>
+          <span class="data-card-badge badge-stored">Stored</span>
+        </div>
+        <div class="data-card">
+          <div>
+            <div class="data-card-title">Voice Input</div>
+            <div class="data-card-desc">If you use voice input, audio is processed in real-time by Google Gemini for transcription only. We do not store your audio recordings.</div>
+          </div>
+          <span class="data-card-badge badge-transient">Transient</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="use">
+      <div class="section-num">02</div>
+      <h2>How We Use Your Information</h2>
+      <ul>
+        <li>Provide, operate, and improve the LoopLab service</li>
+        <li>Generate AI playlists and songs personalized to your preferences</li>
+        <li>Sync playlists to your connected Spotify or YouTube Music account</li>
+        <li>Display your saved songs and playlists within your profile</li>
+        <li>Enable the Discover feed where you can share playlists publicly</li>
+        <li>Send service-related communications (account updates, policy changes)</li>
+      </ul>
+    </section>
+
+    <section id="third-party">
+      <div class="section-num">03</div>
+      <h2>Third-Party Services</h2>
+      <p>LoopLab relies on the following third-party services to operate. Each has its own privacy policy which we encourage you to review.</p>
+      <div class="service-list">
+        <div class="service-row">
+          <div class="service-name">Spotify API</div>
+          <div class="service-purpose">Read and create playlists on your behalf</div>
+        </div>
+        <div class="service-row">
+          <div class="service-name">YouTube Data API</div>
+          <div class="service-purpose">Read and create YouTube Music playlists</div>
+        </div>
+        <div class="service-row">
+          <div class="service-name">Google Gemini AI</div>
+          <div class="service-purpose">Playlist recommendations and voice transcription</div>
+        </div>
+        <div class="service-row">
+          <div class="service-name">ElevenLabs</div>
+          <div class="service-purpose">AI music generation</div>
+        </div>
+        <div class="service-row">
+          <div class="service-name">Cloudinary</div>
+          <div class="service-purpose">Secure cloud storage for generated audio files</div>
+        </div>
+        <div class="service-row">
+          <div class="service-name">MongoDB Atlas</div>
+          <div class="service-purpose">Secure database storage for user data</div>
+        </div>
+        <div class="service-row">
+          <div class="service-name">Railway</div>
+          <div class="service-purpose">Backend service hosting (US-based infrastructure)</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sharing">
+      <div class="section-num">04</div>
+      <h2>Data Sharing</h2>
+      <p>We do not sell, trade, or rent your personal information to third parties. Data is shared only with the services listed above as strictly necessary to provide LoopLab's features.</p>
+      <p>If you make a playlist public in the Discover section, other LoopLab users can view it. You can set any playlist to private or delete it at any time from your Profile tab.</p>
+    </section>
+
+    <section id="security">
+      <div class="section-num">05</div>
+      <h2>Data Security</h2>
+      <p>We implement industry-standard security measures including bcrypt password hashing, JWT authentication, HTTPS encryption for all data in transit, and encrypted storage for platform OAuth tokens on your device. While we take reasonable precautions, no internet transmission is 100% secure.</p>
+    </section>
+
+    <section id="retention">
+      <div class="section-num">06</div>
+      <h2>Data Retention</h2>
+      <p>We retain your data for as long as your account remains active. You may request deletion of your account and all associated data at any time — either through the in-app account deletion flow (Profile → Settings → Delete Account) or by contacting us at the address below.</p>
+    </section>
+
+    <section id="children">
+      <div class="section-num">07</div>
+      <h2>Children's Privacy</h2>
+      <p>LoopLab is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us immediately and we will delete it promptly.</p>
+    </section>
+
+    <section id="rights">
+      <div class="section-num">08</div>
+      <h2>Your Rights</h2>
+      <div class="rights-grid">
+        <div class="right-item"><span class="right-icon">📋</span>Access the personal data we hold about you</div>
+        <div class="right-item"><span class="right-icon">✏️</span>Request correction of inaccurate data</div>
+        <div class="right-item"><span class="right-icon">🗑️</span>Request deletion of your account and data</div>
+        <div class="right-item"><span class="right-icon">🔌</span>Disconnect Spotify or YouTube Music at any time</div>
+        <div class="right-item"><span class="right-icon">🔒</span>Make any playlist private or delete it</div>
+        <div class="right-item"><span class="right-icon">📤</span>Request a copy of your data (data portability)</div>
+      </div>
+      <p style="margin-top:14px">To exercise any of these rights, contact us at <a href="mailto:support@looplab.app" style="color:var(--text)">support@looplab.app</a>. We will respond within 30 days.</p>
+    </section>
+
+    <section id="ccpa">
+      <div class="section-num">09</div>
+      <h2>California Residents (CCPA)</h2>
+      <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA), including the right to know what personal information we collect, the right to delete personal information, and the right to opt out of the sale of personal information. We do not sell personal information. To submit a CCPA request, contact us at <a href="mailto:support@looplab.app" style="color:var(--text)">support@looplab.app</a>.</p>
+    </section>
+
+    <section id="changes">
+      <div class="section-num">10</div>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the "Last updated" date at the top of this page. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <div class="contact-block">
+        <p>Questions or requests regarding this Privacy Policy?</p>
+        <a href="mailto:support@looplab.app">support@looplab.app</a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section[id], #contact');
+  const links = document.querySelectorAll('.toc a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.toc a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
