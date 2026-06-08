@@ -29,12 +29,8 @@ html{scroll-behavior:smooth;}
 body{
   background:var(--deep);color:var(--cream);
   font-family:var(--ff-body);overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;cursor:none;
+  -webkit-font-smoothing:antialiased;
 }
-
-/* ── Cursor ── */
-.cursor{position:fixed;width:10px;height:10px;background:var(--saffron);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
-.cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(255,107,0,0.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;}
 
 /* ── Noise texture ── */
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:0.5;}
@@ -68,10 +64,19 @@ header{
 
 /* ── Hero ── */
 .hero{
-  min-height:100vh;display:flex;flex-direction:column;
+  position:relative;min-height:100vh;display:flex;flex-direction:column;
   justify-content:center;align-items:center;
-  text-align:center;padding:160px 24px 100px;
+  text-align:center;padding:160px 24px 100px;overflow:hidden;
 }
+#dotted-surface{position:absolute;inset:0;z-index:0;pointer-events:none;}
+#dotted-surface canvas{display:block;}
+.hero-glow{
+  position:absolute;top:-10%;left:50%;width:120%;aspect-ratio:1;
+  transform:translateX(-50%);border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at center,rgba(255,107,0,0.16),transparent 55%);
+  filter:blur(40px);
+}
+.hero>.eyebrow,.hero>h1,.hero>.hero-sub,.hero>.cta-group{position:relative;z-index:1;}
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.22);
@@ -191,7 +196,8 @@ header{
 .bc-5{grid-column:span 4;}
 .bc-6{grid-column:span 6;}
 .bc-7{grid-column:span 6;}
-.bico{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:20px;background:rgba(255,107,0,0.1);}
+.bico{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:rgba(255,107,0,0.1);color:var(--saffron);}
+.bico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
 .bc h3{font-size:1.1rem;font-weight:700;color:var(--cream);margin-bottom:9px;}
 .bc p{font-size:0.855rem;color:var(--muted);line-height:1.72;}
 .bnum{font-family:var(--ff-disp);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:900;line-height:1;background:linear-gradient(135deg,var(--saffron),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
@@ -207,7 +213,14 @@ header{
   transition:transform 0.22s,box-shadow 0.22s;
 }
 .mcard:hover{transform:translateY(-5px);}
-.mcard .me{font-size:2.2rem;margin-bottom:10px;display:block;}
+.mcard .me{margin-bottom:14px;display:flex;}
+.mcard .me svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+.mc-h .me{color:var(--saffron);}
+.mc-r .me{color:var(--rose);}
+.mc-s .me{color:#647eea;}
+.mc-e .me{color:#ff0050;}
+.mc-c .me{color:#00bfa5;}
+.mc-n .me{color:#c5484a;}
 .mcard h4{font-size:0.9rem;font-weight:700;margin-bottom:3px;}
 .mcard p{font-size:0.72rem;opacity:0.65;}
 .mc-h{background:rgba(255,107,0,0.09);border-color:rgba(255,107,0,0.18);}
@@ -222,6 +235,64 @@ header{
 .mc-c:hover{box-shadow:0 8px 36px rgba(0,191,165,0.18);}
 .mc-n{background:rgba(197,72,74,0.09);border-color:rgba(197,72,74,0.18);}
 .mc-n:hover{box-shadow:0 8px 36px rgba(197,72,74,0.18);}
+
+/* ── Pricing ── */
+.pricing{padding:80px 0 120px;}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:60px;align-items:stretch;}
+.pcard{
+  background:rgba(255,248,238,0.025);border:1px solid var(--border);border-radius:22px;
+  padding:38px 32px;display:flex;flex-direction:column;
+  transition:border-color 0.3s,transform 0.3s,background 0.3s;position:relative;overflow:hidden;
+}
+.pcard:hover{border-color:rgba(255,107,0,0.28);transform:translateY(-4px);background:rgba(255,248,238,0.04);}
+.pcard-feat{
+  border-color:rgba(255,107,0,0.4);
+  background:linear-gradient(160deg,rgba(255,107,0,0.1),rgba(255,248,238,0.02));
+}
+.ptag{
+  position:absolute;top:22px;right:22px;
+  background:var(--saffron);color:var(--deep);
+  font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  padding:5px 12px;border-radius:50px;
+}
+.pname{font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--saffron);margin-bottom:14px;}
+.pprice{font-family:var(--ff-disp);font-size:2.6rem;font-weight:900;letter-spacing:-0.02em;margin-bottom:6px;}
+.pprice span{font-family:var(--ff-body);font-size:0.95rem;font-weight:400;color:var(--muted);}
+.pdesc{font-size:0.855rem;color:var(--muted);line-height:1.6;margin-bottom:26px;}
+.plist{list-style:none;margin:0 0 30px;flex-grow:1;}
+.plist li{display:flex;align-items:flex-start;gap:10px;font-size:0.875rem;color:var(--cream);padding:9px 0;border-top:1px solid var(--border);}
+.plist li:first-child{border-top:none;}
+.pcheck{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:rgba(255,107,0,0.14);color:var(--saffron);display:flex;align-items:center;justify-content:center;font-size:0.7rem;margin-top:1px;}
+.pbtn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 24px;border-radius:50px;font-weight:700;font-size:0.9rem;text-decoration:none;
+  transition:transform 0.2s,box-shadow 0.2s,background 0.2s;
+}
+.pbtn-p{background:var(--saffron);color:var(--deep);box-shadow:0 4px 28px rgba(255,107,0,0.25);}
+.pbtn-p:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(255,107,0,0.4);}
+.pbtn-s{background:transparent;color:var(--cream);border:1.5px solid rgba(255,248,238,0.18);}
+.pbtn-s:hover{border-color:rgba(255,248,238,0.45);background:rgba(255,248,238,0.04);}
+.pnote{margin-top:30px;font-size:0.8rem;color:var(--muted);text-align:center;}
+
+/* ── FAQ ── */
+.faq{padding:60px 0 130px;}
+.faq-list{margin-top:54px;max-width:760px;}
+.faq-item{border-top:1px solid var(--border);}
+.faq-item:last-child{border-bottom:1px solid var(--border);}
+.faq-q{
+  width:100%;background:none;border:none;text-align:left;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:24px 4px;font-family:var(--ff-body);font-size:1rem;font-weight:600;color:var(--cream);
+}
+.faq-ic{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(255,107,0,0.3);color:var(--saffron);display:flex;align-items:center;justify-content:center;font-size:0.95rem;transition:transform 0.3s,background 0.3s;}
+.faq-item.open .faq-ic{transform:rotate(45deg);background:rgba(255,107,0,0.12);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.35s ease;}
+.faq-item.open .faq-a{max-height:240px;}
+.faq-a p{font-size:0.9rem;color:var(--muted);line-height:1.72;padding:0 4px 26px;max-width:640px;}
+
+@media(max-width:768px){
+  .price-grid{grid-template-columns:1fr;}
+}
 
 /* ── Download CTA ── */
 .dl-cta{
@@ -259,6 +330,18 @@ footer{border-top:1px solid var(--border);padding:56px 0;}
 .rev{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
 .rev.vis{opacity:1;transform:translateY(0);}
 
+/* ── Focus & a11y ── */
+a:focus-visible,button:focus-visible{
+  outline:2px solid var(--saffron);outline-offset:3px;border-radius:6px;
+}
+.mcard,.faq-q{cursor:pointer;}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important;}
+  .rev{opacity:1;transform:none;}
+  #dotted-surface{display:none;}
+}
+
 /* ── Mobile ── */
 @media(max-width:768px){
   header{padding:16px 20px;}
@@ -276,8 +359,6 @@ footer{border-top:1px solid var(--border);padding:56px 0;}
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cring"></div>
 <!-- ── Nav ── -->
 <header>
   <div class="logo">
@@ -291,12 +372,15 @@ footer{border-top:1px solid var(--border);padding:56px 0;}
     <a href="#how">How it works</a>
     <a href="#features">Features</a>
     <a href="#moods">Moods</a>
+    <a href="#pricing">Pricing</a>
     <a href="https://apps.apple.com/app/id6774776556" class="nav-dl">Download</a>
   </nav>
 </header>
 
 <!-- ── Hero ── -->
 <section class="hero">
+  <div id="dotted-surface" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="eyebrow">
     <span class="eyebrow-pulse"></span>
     Now on iOS &amp; Android · Free
@@ -383,33 +467,33 @@ footer{border-top:1px solid var(--border);padding:56px 0;}
     <h2 class="stitle rev">Everything you need.<br/>Nothing you don't.</h2>
     <div class="bento">
       <div class="bc bc-1 rev">
-        <div class="bico">⚡</div>
+        <div class="bico"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
         <div class="bnum">Quick Song</div>
         <h3>Say anything. Get a song.</h3>
         <p>One sentence is all it takes. Funny, emotional, educational or completely random — LoopLab turns any prompt into a full original track in under 30 seconds.</p>
       </div>
       <div class="bc bc-2 rev">
-        <div class="bico">🎧</div>
+        <div class="bico"><svg viewBox="0 0 24 24"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3v-7a9 9 0 0 1 18 0v7h-3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></div>
         <h3>Mood Playlists</h3>
         <p>Pick your genre, mood or occasion. LoopLab assembles a curated playlist instantly and pushes it to Spotify or YouTube Music in one tap.</p>
       </div>
       <div class="bc bc-3 rev">
-        <div class="bico">🔄</div>
+        <div class="bico"><svg viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></div>
         <h3>Convert Playlists</h3>
         <p>Transfer any playlist between Spotify and YouTube Music seamlessly. No re-adding songs manually.</p>
       </div>
       <div class="bc bc-4 rev">
-        <div class="bico">🎉</div>
+        <div class="bico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>
         <h3>Party Mode</h3>
         <p>Mark drop timestamps at every peak moment. Built for DJs, hosts and anyone running a room.</p>
       </div>
       <div class="bc bc-5 rev">
-        <div class="bico">🌍</div>
+        <div class="bico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
         <h3>Discover</h3>
         <p>Browse public playlists from the global LoopLab community. Save what you love to your own profile.</p>
       </div>
       <div class="bc bc-6 rev">
-        <div class="bico">🗣️</div>
+        <div class="bico"><svg viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg></div>
         <h3>17 Languages</h3>
         <p>Create songs in English, Spanish, Hindi, French, Korean, Arabic, Portuguese and more. LoopLab generates authentic lyrics in your language — not translations.</p>
         <div class="lang-pills">
@@ -420,7 +504,7 @@ footer{border-top:1px solid var(--border);padding:56px 0;}
         </div>
       </div>
       <div class="bc bc-7 rev">
-        <div class="bico">🎼</div>
+        <div class="bico"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <h3>Instrument Vibe Picker</h3>
         <p>Add piano, guitar, tabla, violin or any instrument as a style influence. LoopLab blends it naturally into the composition without locking out everything else.</p>
       </div>
@@ -435,12 +519,113 @@ footer{border-top:1px solid var(--border);padding:56px 0;}
     <h2 class="stitle rev">What's your<br/><em style="font-family:var(--ff-disp);font-style:italic;background:linear-gradient(135deg,var(--saffron),var(--rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">vibe</em> right now?</h2>
     <p class="ssub rev">LoopLab understands 12 distinct moods and generates music that genuinely matches how you feel — not just what you typed.</p>
     <div class="moods-grid rev">
-      <div class="mcard mc-h" data-mood="happy"><span class="me">😊</span><h4>Happy</h4><p>Bright &amp; uplifting</p></div>
-      <div class="mcard mc-r" data-mood="romantic"><span class="me">💕</span><h4>Romantic</h4><p>Warm &amp; intimate</p></div>
-      <div class="mcard mc-s" data-mood="sad"><span class="me">🌧️</span><h4>Sad</h4><p>Deep &amp; emotional</p></div>
-      <div class="mcard mc-e" data-mood="energetic"><span class="me">⚡</span><h4>Energetic</h4><p>High &amp; pumped</p></div>
-      <div class="mcard mc-c" data-mood="calm"><span class="me">🌊</span><h4>Calm</h4><p>Peaceful &amp; soft</p></div>
-      <div class="mcard mc-n" data-mood="nostalgic"><span class="me">🌅</span><h4>Nostalgic</h4><p>Warm memories</p></div>
+      <div class="mcard mc-h" data-mood="happy">
+        <span class="me"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></span>
+        <h4>Happy</h4><p>Bright &amp; uplifting</p>
+      </div>
+      <div class="mcard mc-r" data-mood="romantic">
+        <span class="me"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>
+        <h4>Romantic</h4><p>Warm &amp; intimate</p>
+      </div>
+      <div class="mcard mc-s" data-mood="sad">
+        <span class="me"><svg viewBox="0 0 24 24"><path d="M16 13v8"/><path d="M8 13v8"/><path d="M12 15v8"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg></span>
+        <h4>Sad</h4><p>Deep &amp; emotional</p>
+      </div>
+      <div class="mcard mc-e" data-mood="energetic">
+        <span class="me"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></span>
+        <h4>Energetic</h4><p>High &amp; pumped</p>
+      </div>
+      <div class="mcard mc-c" data-mood="calm">
+        <span class="me"><svg viewBox="0 0 24 24"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg></span>
+        <h4>Calm</h4><p>Peaceful &amp; soft</p>
+      </div>
+      <div class="mcard mc-n" data-mood="nostalgic">
+        <span class="me"><svg viewBox="0 0 24 24"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m16 6-4 4-4-4"/><path d="M16 18a4 4 0 0 0-8 0"/></svg></span>
+        <h4>Nostalgic</h4><p>Warm memories</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ── -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <span class="stag rev">Pricing</span>
+    <h2 class="stitle rev">Start free.<br/>Upgrade when you're ready.</h2>
+    <p class="ssub rev">Generate songs, build playlists, and explore moods at no cost. Go Pro for unlimited creation, faster generation, and premium voices.</p>
+    <div class="price-grid">
+      <div class="pcard rev">
+        <div class="pname">Free</div>
+        <div class="pprice">$0<span>/forever</span></div>
+        <p class="pdesc">Everything you need to try LoopLab and start creating AI music today.</p>
+        <ul class="plist">
+          <li><span class="pcheck">✓</span> 5 AI song generations / month</li>
+          <li><span class="pcheck">✓</span> Mood-based playlist creation</li>
+          <li><span class="pcheck">✓</span> Save songs to your profile</li>
+          <li><span class="pcheck">✓</span> Browse the Discover community</li>
+          <li><span class="pcheck">✓</span> 17 languages supported</li>
+        </ul>
+        <a href="https://apps.apple.com/app/id6774776556" class="pbtn pbtn-s">Get started free</a>
+      </div>
+      <div class="pcard pcard-feat rev">
+        <span class="ptag">Most popular</span>
+        <div class="pname">Pro Monthly</div>
+        <div class="pprice">$7.99<span>/month</span></div>
+        <p class="pdesc">Unlimited creation and premium quality for everyday music lovers.</p>
+        <ul class="plist">
+          <li><span class="pcheck">✓</span> Unlimited AI song generations</li>
+          <li><span class="pcheck">✓</span> Priority, faster generation queue</li>
+          <li><span class="pcheck">✓</span> Premium ElevenLabs vocal models</li>
+          <li><span class="pcheck">✓</span> Push playlists to Spotify &amp; YouTube Music</li>
+          <li><span class="pcheck">✓</span> Party Mode drop-timestamp tools</li>
+          <li><span class="pcheck">✓</span> Ad-free experience</li>
+        </ul>
+        <a href="https://apps.apple.com/app/id6774776556" class="pbtn pbtn-p">Go Pro monthly</a>
+      </div>
+      <div class="pcard rev">
+        <span class="ptag">Save 37%</span>
+        <div class="pname">Pro Yearly</div>
+        <div class="pprice">$59.99<span>/year</span></div>
+        <p class="pdesc">All Pro features billed annually — about $5/month.</p>
+        <ul class="plist">
+          <li><span class="pcheck">✓</span> Everything in Pro Monthly</li>
+          <li><span class="pcheck">✓</span> Two months free vs. monthly billing</li>
+          <li><span class="pcheck">✓</span> Early access to new features</li>
+          <li><span class="pcheck">✓</span> Priority support</li>
+        </ul>
+        <a href="https://apps.apple.com/app/id6774776556" class="pbtn pbtn-s">Go Pro yearly</a>
+      </div>
+    </div>
+    <p class="pnote rev">Prices shown in USD and may vary by region. Subscriptions are billed through the App Store or Google Play and renew automatically — manage or cancel anytime in your store account settings.</p>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <span class="stag rev">FAQ</span>
+    <h2 class="stitle rev">Questions?<br/>We've got answers.</h2>
+    <div class="faq-list rev">
+      <div class="faq-item open">
+        <button class="faq-q"><span>Is LoopLab free to use?</span><span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Yes. The Free plan lets you generate songs, build mood playlists and explore the Discover community at no cost. Upgrade to Pro for unlimited generations and premium features.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>How does AI song generation work?</span><span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Describe a feeling, story or moment in your own words. LoopLab uses Gemini and ElevenLabs to write lyrics, compose melody and generate vocals — producing a complete original track in under 30 seconds.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Can I cancel my subscription anytime?</span><span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Absolutely. Pro subscriptions are managed through the App Store or Google Play and can be cancelled anytime from your store account settings — no questions asked.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Which platforms and languages are supported?</span><span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>LoopLab is available on iOS 15.1+ and Android 7.0+, and generates authentic original lyrics in 17 languages including English, Spanish, Hindi, French, Korean and Arabic.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Can I move playlists between Spotify and YouTube Music?</span><span class="faq-ic">+</span></button>
+        <div class="faq-a"><p>Yes — LoopLab's Convert Playlists feature transfers any playlist between Spotify and YouTube Music in one tap, no manual re-adding required.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -480,6 +665,8 @@ footer{border-top:1px solid var(--border);padding:56px 0;}
       <a href="#features">Features</a>
       <a href="#moods">Mood Engine</a>
       <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
     </div>
     <div class="fc">
       <h5>Download</h5>
@@ -499,29 +686,101 @@ footer{border-top:1px solid var(--border);padding:56px 0;}
   </div>
 </footer>
 
-<script>
-// ── Cursor ────────────────────────────────────────────────────────────────────
-const cur=document.getElementById('cursor'),cring=document.getElementById('cring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function anim(){
-  cur.style.left=mx+'px';cur.style.top=my+'px';
-  rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;
-  cring.style.left=rx+'px';cring.style.top=ry+'px';
-  requestAnimationFrame(anim);
-})();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2)';cring.style.width='56px';cring.style.height='56px';});
-  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';cring.style.width='32px';cring.style.height='32px';});
-});
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+// ── Dotted surface (hero background) ──────────────────────────────────────────
+import * as THREE from 'three';
 
+const container = document.getElementById('dotted-surface');
+if (container && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const SEPARATION = 150, AMOUNTX = 40, AMOUNTY = 60;
 
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x0d0805, 2000, 10000);
 
-// ── Mood cards change wave color ──────────────────────────────────────────────
-document.querySelectorAll('.mcard').forEach(card=>{
-  const mood=card.dataset.mood;
-  card.addEventListener('mouseenter',()=>{if(MOOD_C[mood])tr={...MOOD_C[mood]};});
-  card.addEventListener('mouseleave',()=>{tr={r:255,g:107,b:0};});
+  const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 1, 10000);
+  camera.position.set(0, 355, 1220);
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setClearColor(scene.fog.color, 0);
+  container.appendChild(renderer.domElement);
+
+  const positions = [];
+  const colors = [];
+  // Saffron-to-gold palette for particle tinting
+  const palette = [
+    [255, 107, 0],
+    [255, 170, 0],
+    [233, 30, 140],
+  ];
+
+  for (let ix = 0; ix < AMOUNTX; ix++) {
+    for (let iy = 0; iy < AMOUNTY; iy++) {
+      const x = ix * SEPARATION - (AMOUNTX * SEPARATION) / 2;
+      const z = iy * SEPARATION - (AMOUNTY * SEPARATION) / 2;
+      positions.push(x, 0, z);
+      const c = palette[(ix + iy) % palette.length];
+      colors.push(c[0] / 255, c[1] / 255, c[2] / 255);
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+  const material = new THREE.PointsMaterial({
+    size: 7,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.45,
+    sizeAttenuation: true,
+  });
+
+  const points = new THREE.Points(geometry, material);
+  scene.add(points);
+
+  let count = 0;
+  let animationId;
+
+  const animate = () => {
+    animationId = requestAnimationFrame(animate);
+    const positionAttribute = geometry.attributes.position;
+    const pos = positionAttribute.array;
+
+    let i = 0;
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        const index = i * 3;
+        pos[index + 1] = Math.sin((ix + count) * 0.3) * 50 + Math.sin((iy + count) * 0.5) * 50;
+        i++;
+      }
+    }
+    positionAttribute.needsUpdate = true;
+    renderer.render(scene, camera);
+    count += 0.06;
+  };
+
+  const handleResize = () => {
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  };
+  window.addEventListener('resize', handleResize);
+
+  animate();
+}
+
+// ── FAQ accordion ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen)item.classList.add('open');
+  });
 });
 
 // ── Scroll reveal ─────────────────────────────────────────────────────────────
