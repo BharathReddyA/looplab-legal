@@ -47,11 +47,8 @@ header{
   backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
   border-bottom:1px solid var(--border);
 }
-.logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-disp);font-size:1.4rem;font-weight:900;color:var(--cream);letter-spacing:-0.02em;}
-.logo-mark{width:34px;height:34px;background:var(--cream);border-radius:8px;position:relative;display:flex;align-items:flex-end;justify-content:flex-end;padding:5px;gap:2px;}
-.logo-L{position:absolute;top:3px;left:6px;font-family:var(--ff-disp);font-size:15px;font-weight:900;color:var(--deep);line-height:1;}
-.lw{width:3px;background:var(--deep);border-radius:1px;}
-.lw:nth-child(1){height:5px;}.lw:nth-child(2){height:10px;}.lw:nth-child(3){height:15px;}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-disp);font-size:1.4rem;font-weight:900;color:var(--cream);letter-spacing:-0.02em;text-decoration:none;}
+.logo img{display:block;flex-shrink:0;}
 .nav-links{display:flex;gap:28px;align-items:center;}
 .nav-links a{font-size:0.875rem;font-weight:500;color:var(--muted);transition:color 0.2s;text-decoration:none;}
 .nav-links a:hover{color:var(--cream);}
@@ -362,10 +359,7 @@ a:focus-visible,button:focus-visible{
 <!-- ── Nav ── -->
 <header>
   <div class="logo">
-    <div class="logo-mark">
-      <span class="logo-L">L</span>
-      <div class="lw"></div><div class="lw"></div><div class="lw"></div>
-    </div>
+    <img src="looplab-icon.svg" width="34" height="34" alt="LoopLab icon"/>
     LoopLab
   </div>
   <nav class="nav-links">
@@ -655,7 +649,7 @@ a:focus-visible,button:focus-visible{
   <div class="fi">
     <div class="fb">
       <div class="logo">
-        <div class="logo-mark"><span class="logo-L">L</span><div class="lw"></div><div class="lw"></div><div class="lw"></div></div>
+        <img src="looplab-icon.svg" width="34" height="34" alt="LoopLab icon"/>
         LoopLab
       </div>
       <p>AI-powered music for every mood, every language, every moment. Built for music lovers everywhere.</p>
