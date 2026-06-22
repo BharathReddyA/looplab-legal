@@ -9,6 +9,8 @@
 <meta property="og:title" content="LoopLab — AI Music"/>
 <meta property="og:description" content="Say anything, get a song. AI-powered music for every mood, every language, every vibe."/>
 <meta name="apple-itunes-app" content="app-id=6774776556"/>
+<link rel="icon" type="image/svg+xml" href="looplab-icon.svg"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
@@ -118,6 +120,12 @@ header{
 }
 .btn-s:hover{border-color:rgba(255,248,238,0.45);background:rgba(255,248,238,0.04);}
 .bi{width:19px;height:19px;fill:currentColor;flex-shrink:0;}
+
+/* ── Disabled store buttons ── */
+.is-disabled{
+  opacity:0.4;cursor:not-allowed;pointer-events:none;
+  filter:grayscale(0.4);
+}
 
 /* ── Marquee ── */
 .marquee{
@@ -234,44 +242,6 @@ header{
 .mc-n{background:rgba(197,72,74,0.09);border-color:rgba(197,72,74,0.18);}
 .mc-n:hover{box-shadow:0 8px 36px rgba(197,72,74,0.18);}
 
-/* ── Pricing ── */
-.pricing{padding:80px 0 120px;}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:60px;align-items:stretch;}
-.pcard{
-  background:rgba(255,248,238,0.025);border:1px solid var(--border);border-radius:22px;
-  padding:38px 32px;display:flex;flex-direction:column;
-  transition:border-color 0.3s,transform 0.3s,background 0.3s;position:relative;overflow:hidden;
-}
-.pcard:hover{border-color:rgba(255,107,0,0.28);transform:translateY(-4px);background:rgba(255,248,238,0.04);}
-.pcard-feat{
-  border-color:rgba(255,107,0,0.4);
-  background:linear-gradient(160deg,rgba(255,107,0,0.1),rgba(255,248,238,0.02));
-}
-.ptag{
-  position:absolute;top:22px;right:22px;
-  background:var(--saffron);color:var(--deep);
-  font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
-  padding:5px 12px;border-radius:50px;
-}
-.pname{font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--saffron);margin-bottom:14px;}
-.pprice{font-family:var(--ff-disp);font-size:2.6rem;font-weight:900;letter-spacing:-0.02em;margin-bottom:6px;}
-.pprice span{font-family:var(--ff-body);font-size:0.95rem;font-weight:400;color:var(--muted);}
-.pdesc{font-size:0.855rem;color:var(--muted);line-height:1.6;margin-bottom:26px;}
-.plist{list-style:none;margin:0 0 30px;flex-grow:1;}
-.plist li{display:flex;align-items:flex-start;gap:10px;font-size:0.875rem;color:var(--cream);padding:9px 0;border-top:1px solid var(--border);}
-.plist li:first-child{border-top:none;}
-.pcheck{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:rgba(255,107,0,0.14);color:var(--saffron);display:flex;align-items:center;justify-content:center;font-size:0.7rem;margin-top:1px;}
-.pbtn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:14px 24px;border-radius:50px;font-weight:700;font-size:0.9rem;text-decoration:none;
-  transition:transform 0.2s,box-shadow 0.2s,background 0.2s;
-}
-.pbtn-p{background:var(--saffron);color:var(--deep);box-shadow:0 4px 28px rgba(255,107,0,0.25);}
-.pbtn-p:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(255,107,0,0.4);}
-.pbtn-s{background:transparent;color:var(--cream);border:1.5px solid rgba(255,248,238,0.18);}
-.pbtn-s:hover{border-color:rgba(255,248,238,0.45);background:rgba(255,248,238,0.04);}
-.pnote{margin-top:30px;font-size:0.8rem;color:var(--muted);text-align:center;}
-
 /* ── FAQ ── */
 .faq{padding:60px 0 130px;}
 .faq-list{margin-top:54px;max-width:760px;}
@@ -287,10 +257,6 @@ header{
 .faq-a{max-height:0;overflow:hidden;transition:max-height 0.35s ease;}
 .faq-item.open .faq-a{max-height:240px;}
 .faq-a p{font-size:0.9rem;color:var(--muted);line-height:1.72;padding:0 4px 26px;max-width:640px;}
-
-@media(max-width:768px){
-  .price-grid{grid-template-columns:1fr;}
-}
 
 /* ── Download CTA ── */
 .dl-cta{
@@ -320,7 +286,7 @@ footer{border-top:1px solid var(--border);padding:56px 0;}
 .fi{max-width:1160px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;}
 .fb p{font-size:0.855rem;color:var(--muted);line-height:1.72;margin:14px 0 0;max-width:240px;}
 .fc h5{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
-.fc a{display:block;font-size:0.855rem;color:rgba(255,248,238,0.55);margin-bottom:11px;transition:color 0.2s;text-decoration:none;}
+.fc a,.fc span{display:block;font-size:0.855rem;color:rgba(255,248,238,0.55);margin-bottom:11px;transition:color 0.2s;text-decoration:none;}
 .fc a:hover{color:var(--cream);}
 .fb-bot{max-width:1160px;margin:36px auto 0;padding:22px 40px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:var(--muted);}
 
@@ -367,8 +333,7 @@ a:focus-visible,button:focus-visible{
     <a href="#how">How it works</a>
     <a href="#features">Features</a>
     <a href="#moods">Moods</a>
-    <a href="#pricing">Pricing</a>
-    <a href="https://apps.apple.com/app/id6774776556" class="nav-dl">Download</a>
+    <a href="https://apps.apple.com/us/app/looplab-ai-music/id6774776556" class="nav-dl">Download</a>
   </nav>
 </header>
 
@@ -383,14 +348,14 @@ a:focus-visible,button:focus-visible{
   <h1>Music that <em>moves</em><br/>with you.</h1>
   <p class="hero-sub">Generate original AI songs, build mood playlists, and discover music that matches exactly how you feel — in any language, any genre, any moment.</p>
   <div class="cta-group">
-    <a href="https://apps.apple.com/app/id6774776556" class="btn-p">
+    <a href="https://apps.apple.com/us/app/looplab-ai-music/id6774776556" class="btn-p">
       <svg class="bi" viewBox="0 0 24 24"><path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.48C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/></svg>
       App Store
     </a>
-    <a href="https://play.google.com/store/apps/details?id=com.looplab.app" class="btn-s">
+    <span class="btn-s is-disabled" aria-disabled="true" title="Coming soon on Google Play">
       <svg class="bi" viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
-      Google Play
-    </a>
+      Google Play — Coming Soon
+    </span>
   </div>
 </section>
 
@@ -542,59 +507,6 @@ a:focus-visible,button:focus-visible{
   </div>
 </section>
 
-<!-- ── Pricing ── -->
-<section class="pricing" id="pricing">
-  <div class="wrap">
-    <span class="stag rev">Pricing</span>
-    <h2 class="stitle rev">Start free.<br/>Upgrade when you're ready.</h2>
-    <p class="ssub rev">Generate songs, build playlists, and explore moods at no cost. Go Pro for unlimited creation, faster generation, and premium voices.</p>
-    <div class="price-grid">
-      <div class="pcard rev">
-        <div class="pname">Free</div>
-        <div class="pprice">$0<span>/forever</span></div>
-        <p class="pdesc">Everything you need to try LoopLab and start creating AI music today.</p>
-        <ul class="plist">
-          <li><span class="pcheck">✓</span> 5 AI song generations / month</li>
-          <li><span class="pcheck">✓</span> Mood-based playlist creation</li>
-          <li><span class="pcheck">✓</span> Save songs to your profile</li>
-          <li><span class="pcheck">✓</span> Browse the Discover community</li>
-          <li><span class="pcheck">✓</span> 17 languages supported</li>
-        </ul>
-        <a href="https://apps.apple.com/app/id6774776556" class="pbtn pbtn-s">Get started free</a>
-      </div>
-      <div class="pcard pcard-feat rev">
-        <span class="ptag">Most popular</span>
-        <div class="pname">Pro Monthly</div>
-        <div class="pprice">$7.99<span>/month</span></div>
-        <p class="pdesc">Unlimited creation and premium quality for everyday music lovers.</p>
-        <ul class="plist">
-          <li><span class="pcheck">✓</span> Unlimited AI song generations</li>
-          <li><span class="pcheck">✓</span> Priority, faster generation queue</li>
-          <li><span class="pcheck">✓</span> Premium ElevenLabs vocal models</li>
-          <li><span class="pcheck">✓</span> Push playlists to Spotify &amp; YouTube Music</li>
-          <li><span class="pcheck">✓</span> Party Mode drop-timestamp tools</li>
-          <li><span class="pcheck">✓</span> Ad-free experience</li>
-        </ul>
-        <a href="https://apps.apple.com/app/id6774776556" class="pbtn pbtn-p">Go Pro monthly</a>
-      </div>
-      <div class="pcard rev">
-        <span class="ptag">Save 37%</span>
-        <div class="pname">Pro Yearly</div>
-        <div class="pprice">$59.99<span>/year</span></div>
-        <p class="pdesc">All Pro features billed annually — about $5/month.</p>
-        <ul class="plist">
-          <li><span class="pcheck">✓</span> Everything in Pro Monthly</li>
-          <li><span class="pcheck">✓</span> Two months free vs. monthly billing</li>
-          <li><span class="pcheck">✓</span> Early access to new features</li>
-          <li><span class="pcheck">✓</span> Priority support</li>
-        </ul>
-        <a href="https://apps.apple.com/app/id6774776556" class="pbtn pbtn-s">Go Pro yearly</a>
-      </div>
-    </div>
-    <p class="pnote rev">Prices shown in USD and may vary by region. Subscriptions are billed through the App Store or Google Play and renew automatically — manage or cancel anytime in your store account settings.</p>
-  </div>
-</section>
-
 <!-- ── FAQ ── -->
 <section class="faq" id="faq">
   <div class="wrap">
@@ -632,14 +544,14 @@ a:focus-visible,button:focus-visible{
     <h2 class="stitle rev">Your music.<br/>Your moment.<br/><em style="font-family:var(--ff-disp);font-style:italic;background:linear-gradient(135deg,var(--saffron),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Your song.</em></h2>
     <p class="ssub rev">Download LoopLab free. Create your first AI song in under 60 seconds.</p>
     <div class="store-row rev">
-      <a href="https://apps.apple.com/app/id6774776556" class="sbtn sbtn-ios">
+      <a href="https://apps.apple.com/us/app/looplab-ai-music/id6774776556" class="sbtn sbtn-ios">
         <svg viewBox="0 0 24 24"><path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.48C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/></svg>
         <div class="sbl"><span class="sbl-sm">Download on the</span><span class="sbl-lg">App Store</span></div>
       </a>
-      <a href="https://play.google.com/store/apps/details?id=com.looplab.app" class="sbtn sbtn-and">
+      <span class="sbtn sbtn-and is-disabled" aria-disabled="true" title="Coming soon on Google Play">
         <svg viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
-        <div class="sbl"><span class="sbl-sm">Get it on</span><span class="sbl-lg">Google Play</span></div>
-      </a>
+        <div class="sbl"><span class="sbl-sm">Coming soon on</span><span class="sbl-lg">Google Play</span></div>
+      </span>
     </div>
     <p class="dl-note rev">Free to download · iOS 15.1+ · Android 7.0+</p>
   </div>
@@ -660,13 +572,12 @@ a:focus-visible,button:focus-visible{
       <a href="#features">Features</a>
       <a href="#moods">Mood Engine</a>
       <a href="#how">How it works</a>
-      <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </div>
     <div class="fc">
       <h5>Download</h5>
-      <a href="https://apps.apple.com/app/id6774776556">App Store</a>
-      <a href="https://play.google.com/store/apps/details?id=com.looplab.app">Google Play</a>
+      <a href="https://apps.apple.com/us/app/looplab-ai-music/id6774776556">App Store</a>
+      <span class="is-disabled" aria-disabled="true" title="Coming soon">Google Play</span>
     </div>
     <div class="fc">
       <h5>Legal</h5>
