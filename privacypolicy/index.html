@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Privacy Policy — LoopLab</title>
+<meta name="description" content="How LoopLab collects, uses, and protects your data."/>
+<link rel="icon" type="image/svg+xml" href="../looplab-icon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --saffron:#FF6B00;--gold:#FFAA00;--rose:#E91E8C;--deep:#0D0805;--ink:#150C05;
+  --cream:#FFF8EE;--muted:#7A6858;--border:rgba(255,107,0,0.12);
+  --surface:rgba(255,248,238,0.025);
+  --ff-disp:'Playfair Display',Georgia,serif;--ff-body:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--deep);color:var(--cream);font-family:var(--ff-body);line-height:1.75;-webkit-font-smoothing:antialiased;}
+
+header{
+  position:sticky;top:0;z-index:100;padding:18px 48px;display:flex;
+  justify-content:space-between;align-items:center;
+  background:rgba(13,8,5,0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--ff-disp);font-size:1.4rem;font-weight:900;color:var(--cream);letter-spacing:-0.02em;text-decoration:none;}
+.hnav{display:flex;gap:24px;}
+.hnav a{font-size:0.875rem;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;}
+.hnav a:hover,.hnav a.active{color:var(--saffron);}
+
+/* mobile horizontal tab bar */
+.mtabs{
+  display:none;position:sticky;top:71px;z-index:99;overflow-x:auto;
+  background:rgba(13,8,5,0.92);border-bottom:1px solid var(--border);
+  padding:12px 20px;gap:10px;white-space:nowrap;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.mtabs::-webkit-scrollbar{display:none;}
+.mtabs a{
+  display:inline-block;font-size:0.78rem;font-weight:600;color:var(--muted);
+  text-decoration:none;padding:7px 16px;border-radius:50px;
+  border:1px solid var(--border);margin-right:8px;transition:all .2s;
+}
+.mtabs a.active{color:var(--deep);background:var(--saffron);border-color:var(--saffron);}
+
+.hero{max-width:880px;margin:0 auto;padding:72px 40px 44px;border-bottom:1px solid var(--border);}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,0,0.1);
+  border:1px solid rgba(255,107,0,0.22);border-radius:50px;padding:6px 16px;
+  font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:22px;
+}
+h1{font-family:var(--ff-disp);font-size:clamp(2.4rem,5.5vw,3.6rem);font-weight:900;letter-spacing:-0.025em;line-height:1.08;margin-bottom:14px;}
+.hmeta{font-size:0.85rem;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap;}
+
+.layout{max-width:880px;margin:0 auto;padding:0 40px 100px;display:grid;grid-template-columns:220px 1fr;gap:0 48px;align-items:start;}
+
+/* vertical timeline TOC */
+.toc{position:sticky;top:96px;padding:36px 0;}
+.toc-label{font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--saffron);margin-bottom:16px;}
+.tl{position:relative;padding-left:18px;border-left:1px solid var(--border);}
+.tl a{
+  position:relative;display:block;font-size:0.82rem;color:var(--muted);
+  text-decoration:none;padding:8px 0;line-height:1.4;transition:color .2s;
+}
+.tl a::before{
+  content:'';position:absolute;left:-23px;top:14px;width:7px;height:7px;border-radius:50%;
+  background:var(--deep);border:1.5px solid var(--border);transition:all .2s;
+}
+.tl a:hover{color:var(--cream);}
+.tl a.active{color:var(--saffron);font-weight:600;}
+.tl a.active::before{background:var(--saffron);border-color:var(--saffron);box-shadow:0 0 0 3px rgba(255,107,0,0.18);}
+
+.content{padding:40px 0;}
+section{margin-bottom:52px;scroll-margin-top:96px;}
+.snum{font-size:0.7rem;font-weight:700;color:var(--saffron);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px;}
+h2{font-family:var(--ff-disp);font-size:1.5rem;font-weight:900;letter-spacing:-0.02em;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+p{font-size:0.94rem;color:var(--muted);margin-bottom:14px;}
+p:last-child{margin-bottom:0;}
+strong{color:var(--cream);font-weight:600;}
+a{color:var(--saffron);}
+
+ul{list-style:none;margin-bottom:14px;}
+li{font-size:0.9rem;color:var(--muted);padding:9px 0 9px 18px;border-bottom:1px solid var(--border);position:relative;}
+li:last-child{border-bottom:none;}
+li::before{content:'';position:absolute;left:0;top:17px;width:5px;height:5px;border-radius:50%;background:var(--saffron);}
+
+.dgrid{display:grid;gap:8px;margin-bottom:14px;}
+.dcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;transition:border-color .2s;}
+.dcard:hover{border-color:rgba(255,107,0,0.28);}
+.dtitle{font-size:0.88rem;font-weight:700;color:var(--cream);margin-bottom:4px;}
+.ddesc{font-size:0.82rem;color:var(--muted);}
+.badge{font-size:0.62rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:4px 10px;border-radius:50px;white-space:nowrap;height:fit-content;}
+.b-stored{background:rgba(0,191,165,0.12);color:#00bfa5;border:1px solid rgba(0,191,165,0.25);}
+.b-trans{background:rgba(100,126,234,0.12);color:#647eea;border:1px solid rgba(100,126,234,0.25);}
+.b-token{background:rgba(255,107,0,0.12);color:var(--saffron);border:1px solid rgba(255,107,0,0.25);}
+
+.slist{border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.srow{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid var(--border);}
+.srow:last-child{border-bottom:none;}
+.sname{padding:13px 18px;font-size:0.82rem;font-weight:700;color:var(--cream);border-right:1px solid var(--border);}
+.spurpose{padding:13px 18px;font-size:0.82rem;color:var(--muted);}
+
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.ritem{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;font-size:0.86rem;color:var(--muted);display:flex;gap:10px;align-items:flex-start;}
+
+.cblock{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;margin-top:8px;}
+.cblock p{font-size:0.95rem;margin-bottom:16px;}
+.cblock a{
+  display:inline-block;background:var(--saffron);color:var(--deep)!important;font-weight:700;
+  text-decoration:none;padding:11px 26px;border-radius:50px;transition:transform .2s;
+}
+.cblock a:hover{transform:scale(1.04);}
+
+footer{border-top:1px solid var(--border);padding:32px 40px;text-align:center;font-size:0.78rem;color:var(--muted);}
+
+@media(max-width:768px){
+  header{padding:14px 20px;}
+  .hnav{display:none;}
+  .mtabs{display:flex;}
+  .hero{padding:36px 20px 28px;}
+  .layout{grid-template-columns:1fr;padding:0 20px 70px;}
+  .toc{display:none;}
+  .rgrid{grid-template-columns:1fr;}
+  .srow{grid-template-columns:120px 1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="https://getlooplab.app/">LoopLab</a>
+  <nav class="hnav">
+    <a href="https://getlooplab.app/">Home</a>
+    <a href="/privacypolicy/" class="active">Privacy Policy</a>
+    <a href="/termsandconditions/">Terms &amp; Conditions</a>
+  </nav>
+</header>
+
+<nav class="mtabs" id="mtabs">
+  <a href="#collection" class="active">Data we collect</a>
+  <a href="#use">How we use it</a>
+  <a href="#third-party">Third-party</a>
+  <a href="#sharing">Sharing</a>
+  <a href="#security">Security</a>
+  <a href="#retention">Retention</a>
+  <a href="#children">Children</a>
+  <a href="#rights">Your rights</a>
+  <a href="#ccpa">California</a>
+  <a href="#changes">Changes</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Legal Document</div>
+  <h1>Privacy Policy</h1>
+  <div class="hmeta">
+    <span>Last updated: May 29, 2026</span>
+    <span>Effective: May 29, 2026</span>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="toc">
+    <div class="toc-label">Contents</div>
+    <div class="tl" id="tl">
+      <a href="#collection" class="active">1. Data we collect</a>
+      <a href="#use">2. How we use it</a>
+      <a href="#third-party">3. Third-party services</a>
+      <a href="#sharing">4. Data sharing</a>
+      <a href="#security">5. Security</a>
+      <a href="#retention">6. Retention</a>
+      <a href="#children">7. Children's privacy</a>
+      <a href="#rights">8. Your rights</a>
+      <a href="#ccpa">9. California rights</a>
+      <a href="#changes">10. Policy changes</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <p>LoopLab ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use the LoopLab mobile application.</p>
+
+    <section id="collection">
+      <div class="snum">01</div>
+      <h2>Information We Collect</h2>
+      <div class="dgrid">
+        <div class="dcard">
+          <div><div class="dtitle">Account Information</div><div class="ddesc">Your name, email address, and a bcrypt-hashed password when you register — or your name and email from Google/Apple if you sign in with them.</div></div>
+          <span class="badge b-stored">Stored</span>
+        </div>
+        <div class="dcard">
+          <div><div class="dtitle">Platform OAuth Tokens</div><div class="ddesc">Access and refresh tokens when you connect Spotify, YouTube Music, Google, or Apple Sign-In. We never store your platform passwords.</div></div>
+          <span class="badge b-token">Token only</span>
+        </div>
+        <div class="dcard">
+          <div><div class="dtitle">Usage &amp; Preferences</div><div class="ddesc">Playlists you generate, songs you create, and in-app preferences such as mood and instrument selections.</div></div>
+          <span class="badge b-stored">Stored</span>
+        </div>
+        <div class="dcard">
+          <div><div class="dtitle">AI-Generated Audio</div><div class="ddesc">Songs generated by ElevenLabs are uploaded to Cloudinary and linked to your account.</div></div>
+          <span class="badge b-stored">Stored</span>
+        </div>
+        <div class="dcard">
+          <div><div class="dtitle">Voice Input</div><div class="ddesc">If you use voice input, audio is processed in real-time by Google Gemini for transcription only. We do not store your audio recordings.</div></div>
+          <span class="badge b-trans">Transient</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="use">
+      <div class="snum">02</div>
+      <h2>How We Use Your Information</h2>
+      <ul>
+        <li>Provide, operate, and improve the LoopLab service</li>
+        <li>Authenticate you via email/password, Google Sign-In, or Sign in with Apple</li>
+        <li>Generate AI playlists and songs personalized to your preferences</li>
+        <li>Sync playlists to your connected Spotify or YouTube Music account</li>
+        <li>Display your saved songs and playlists within your profile</li>
+        <li>Enable the Discover feed where you can share playlists publicly</li>
+        <li>Send service-related communications (account updates, policy changes)</li>
+      </ul>
+    </section>
+
+    <section id="third-party">
+      <div class="snum">03</div>
+      <h2>Third-Party Services</h2>
+      <p>LoopLab relies on the following third-party services to operate. Each has its own privacy policy which we encourage you to review.</p>
+      <div class="slist">
+        <div class="srow"><div class="sname">Google Sign-In</div><div class="spurpose">Authenticate you using your Google account name, email, and profile photo</div></div>
+        <div class="srow"><div class="sname">Sign in with Apple</div><div class="spurpose">Authenticate you using your Apple ID name and (proxied) email</div></div>
+        <div class="srow"><div class="sname">Spotify API</div><div class="spurpose">Read and create playlists on your behalf</div></div>
+        <div class="srow"><div class="sname">YouTube Data API</div><div class="spurpose">Read and create YouTube Music playlists</div></div>
+        <div class="srow"><div class="sname">Google Gemini AI</div><div class="spurpose">Playlist recommendations and voice transcription</div></div>
+        <div class="srow"><div class="sname">ElevenLabs</div><div class="spurpose">AI music generation</div></div>
+        <div class="srow"><div class="sname">Cloudinary</div><div class="spurpose">Secure cloud storage for generated audio files</div></div>
+        <div class="srow"><div class="sname">MongoDB Atlas</div><div class="spurpose">Secure database storage for user data</div></div>
+        <div class="srow"><div class="sname">Railway</div><div class="spurpose">Backend service hosting (US-based infrastructure)</div></div>
+      </div>
+    </section>
+
+    <section id="sharing">
+      <div class="snum">04</div>
+      <h2>Data Sharing</h2>
+      <p>We do not sell, trade, or rent your personal information to third parties. Data is shared only with the services listed above as strictly necessary to provide LoopLab's features.</p>
+      <p>If you make a playlist public in the Discover section, other LoopLab users can view it. You can set any playlist to private or delete it at any time from your Profile tab.</p>
+    </section>
+
+    <section id="security">
+      <div class="snum">05</div>
+      <h2>Data Security</h2>
+      <p>We implement industry-standard security measures including bcrypt password hashing, JWT authentication, HTTPS encryption for all data in transit, and encrypted storage for platform OAuth tokens on your device. While we take reasonable precautions, no internet transmission is 100% secure.</p>
+    </section>
+
+    <section id="retention">
+      <div class="snum">06</div>
+      <h2>Data Retention</h2>
+      <p>We retain your data for as long as your account remains active. You may request deletion of your account and all associated data at any time — either through the in-app account deletion flow (Profile → Settings → Delete Account) or by contacting us at the address below.</p>
+    </section>
+
+    <section id="children">
+      <div class="snum">07</div>
+      <h2>Children's Privacy</h2>
+      <p>LoopLab is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us immediately and we will delete it promptly.</p>
+    </section>
+
+    <section id="rights">
+      <div class="snum">08</div>
+      <h2>Your Rights</h2>
+      <div class="rgrid">
+        <div class="ritem">Access the personal data we hold about you</div>
+        <div class="ritem">Request correction of inaccurate data</div>
+        <div class="ritem">Request deletion of your account and data</div>
+        <div class="ritem">Disconnect Spotify, YouTube Music, Google, or Apple at any time</div>
+        <div class="ritem">Make any playlist private or delete it</div>
+        <div class="ritem">Request a copy of your data (data portability)</div>
+      </div>
+      <p style="margin-top:14px">To exercise any of these rights, contact us at <a href="mailto:support@getlooplab.app">support@getlooplab.app</a>. We will respond within 30 days.</p>
+    </section>
+
+    <section id="ccpa">
+      <div class="snum">09</div>
+      <h2>California Residents (CCPA)</h2>
+      <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA), including the right to know what personal information we collect, the right to delete personal information, and the right to opt out of the sale of personal information. We do not sell personal information. To submit a CCPA request, contact us at <a href="mailto:support@getlooplab.app">support@getlooplab.app</a>.</p>
+    </section>
+
+    <section id="changes">
+      <div class="snum">10</div>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the "Last updated" date at the top of this page. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <div class="cblock">
+        <p>Questions or requests regarding this Privacy Policy?</p>
+        <a href="mailto:support@getlooplab.app">support@getlooplab.app</a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>© 2026 LoopLab AI Music · com.looplab.app</footer>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const tlLinks = document.querySelectorAll('.tl a');
+  const tabLinks = document.querySelectorAll('.mtabs a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        tlLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+        tabLinks.forEach(l => {
+          const active = l.getAttribute('href') === '#' + id;
+          l.classList.toggle('active', active);
+          if (active) l.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
