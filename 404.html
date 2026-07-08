@@ -5,20 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LoopLab — AI Music</title>
   <script>
-    // Redirect /song/ID to /song/?id=ID so index.html can read it
-    const path = window.location.pathname;
-    const parts = path.split('/').filter(Boolean);
-
-    // /looplab-legal/song/SONG_ID → redirect to /looplab-legal/song/?id=SONG_ID
-    if (parts.includes('song') && parts[parts.length - 1] !== 'song') {
-      const songId = parts[parts.length - 1];
-      window.location.replace(
-        '/looplab-legal/song/?id=' + songId
-      );
-    } else {
-      // Unknown path — go to main page
-      window.location.replace('/looplab-legal/');
-    }
+    // GitHub Pages serves this for unknown paths like /song/ID or /playlist/ID.
+    // Redirect to the matching page with ?id= so its index.html can read it.
+    // Works on both the custom domain (getlooplab.app, served at root) and the
+    // project path (bharathreddya.github.io/looplab-legal) by preserving the
+    // base path up to and including the "song"/"playlist" segment.
+    (function () {
+      var parts = window.location.pathname.split('/').filter(Boolean);
+      var handle = function (name) {
+        var idx = parts.indexOf(name);
+        if (idx !== -1 && parts.length > idx + 1) {
+          var id = parts[parts.length - 1];
+          var base = '/' + parts.slice(0, idx + 1).join('/');
+          window.location.replace(base + '/?id=' + id);
+          return true;
+        }
+        return false;
+      };
+      if (handle('song') || handle('playlist')) return;
+      // Unknown path — go to the site root (with project prefix if present)
+      window.location.replace(parts.indexOf('looplab-legal') !== -1 ? '/looplab-legal/' : '/');
+    })();
   </script>
 </head>
 <body></body>
