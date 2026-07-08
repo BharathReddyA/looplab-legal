@@ -116,10 +116,12 @@
               .filter(Boolean).join(' · ');
             document.getElementById('songMeta').textContent = meta || 'LoopLab AI Generated';
             document.title = `${data.song.title} — LoopLab AI`;
+          } else {
+            document.getElementById('songMeta').textContent = data.error || 'This song is private or no longer available.';
           }
         })
         .catch(() => {
-          document.getElementById('songMeta').textContent = 'AI Generated Song';
+          document.getElementById('songMeta').textContent = 'Could not load this song.';
         });
     }
 
