@@ -93,6 +93,11 @@
   <div class="footer">Made with LoopLab AI · getlooplab.app</div>
 
   <script>
+    // Full HTML-entity escape for anything interpolated via innerHTML below.
+    const escapeHtml = (str) => String(str ?? '').replace(/[&<>"']/g, (c) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+    }[c]));
+
     const params = new URLSearchParams(window.location.search);
     const pathParts = window.location.pathname.split('/').filter(Boolean);
     const playlistId = params.get('id') || pathParts[pathParts.length - 1];
@@ -114,8 +119,8 @@
             <div class="song-row">
               <div class="song-num">${i + 1}</div>
               <div class="song-info">
-                <div class="song-name">${(s.title || '').replace(/</g, '&lt;')}</div>
-                <div class="song-artist">${(s.artist || '').replace(/</g, '&lt;')}</div>
+                <div class="song-name">${escapeHtml(s.title)}</div>
+                <div class="song-artist">${escapeHtml(s.artist)}</div>
               </div>
             </div>`).join('');
         })
